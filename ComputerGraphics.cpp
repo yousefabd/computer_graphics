@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -93,8 +92,6 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
-
-    // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // glad: load all OpenGL function pointers
@@ -104,12 +101,8 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
-    // configure global opengl state
-    // -----------------------------
     glEnable(GL_DEPTH_TEST);
-
-    // build and compile our shader zprogram
+    // build and compile our shader program
     // ------------------------------------
     Shader ourShader("vertexShader.vs", "fragmentShader.fs");
     Shape shape;
@@ -135,19 +128,13 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3)));
     glEnableVertexAttribArray(1);
 
-
     // load and create a texture 
     // -------------------------
     unsigned int mosque_wall=texture.genTexture("images/building-wall-outside.jpg");
-
-
-    // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
-    // -------------------------------------------------------------------------------------------
     ourShader.use();
     ourShader.setInt("texture1", 0);
     // render loop
     // -----------
-    float temp = 0.0f;
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -159,8 +146,7 @@ int main()
         // input
         // -----
         processInput(window);
-
-        // render
+        // clear buffer and depth
         // ------
         renderer.clear();
 
@@ -182,19 +168,11 @@ int main()
         glm::mat4 model = glm::mat4(1.0f);
         renderer.drawOctagon(vertices.size(), model, ourShader);
 
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
-    // optional: de-allocate all resources once they've outlived their purpose:
-    // ------------------------------------------------------------------------
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
 }
