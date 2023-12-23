@@ -151,9 +151,7 @@ int main()
         renderer.clear();
 
         // bind textures on corresponding texture units
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, mosque_wall);
-
+        texture.activate(mosque_wall, GL_TEXTURE0);
         // activate shader
         ourShader.use();
 

@@ -19,7 +19,7 @@ void Renderer::bind(unsigned int VAO, unsigned int VBO, Shader shader) {
 }
 void Renderer::drawOctagon(int size,Shader shader) {
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::scale(model, glm::vec3(9.0f, 4.0f, 7.0f));
+    model = glm::scale(model, glm::vec3(7.0f, 4.0f, 7.0f));
     shader.setMat4("model", model);
     glDrawArrays(GL_TRIANGLES, 0, size);
     for (int i = 0; i < 7; i++) {

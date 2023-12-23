@@ -34,5 +34,9 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		return texture;
 	}
+	void activate(unsigned int texture, int value) {
+		glActiveTexture(value);
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
 };
 #endif
