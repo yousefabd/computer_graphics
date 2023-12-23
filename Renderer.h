@@ -7,7 +7,7 @@ class Renderer {
 public:
 	void clear() const;
 	void bind(unsigned int VAO, unsigned int VBO, Shader shader);
-	void drawOctagon(int size, glm::mat4 model, Shader shader);
+	void drawOctagon(int size, Shader shader);
 };
 void Renderer::clear() const{
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -17,8 +17,9 @@ void Renderer::bind(unsigned int VAO, unsigned int VBO, Shader shader) {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER,VBO);
 }
-void Renderer::drawOctagon(int size, glm::mat4 model, Shader shader) {
-    model = glm::scale(model, glm::vec3(6.0f, 3.0f, 6.0f));
+void Renderer::drawOctagon(int size,Shader shader) {
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::scale(model, glm::vec3(9.0f, 4.0f, 7.0f));
     shader.setMat4("model", model);
     glDrawArrays(GL_TRIANGLES, 0, size);
     for (int i = 0; i < 7; i++) {

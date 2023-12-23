@@ -1,4 +1,4 @@
 ﻿  ComputerGraphics.cpp
 C:\Users\LEGION\Source\Repos\ComputerGraphics\Shape.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\LEGION\Source\Repos\ComputerGraphics\ComputerGraphics.cpp(183,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\ComputerGraphics.cpp(168,56): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   ComputerGraphics.vcxproj -> C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\ComputerGraphics.exe

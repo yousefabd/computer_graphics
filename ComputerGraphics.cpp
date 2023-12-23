@@ -165,8 +165,7 @@ int main()
 
         // render boxes
         renderer.bind(VAO,VBO,ourShader);
-        glm::mat4 model = glm::mat4(1.0f);
-        renderer.drawOctagon(vertices.size(), model, ourShader);
+        renderer.drawOctagon(vertices.size(), ourShader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
