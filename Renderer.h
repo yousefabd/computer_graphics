@@ -12,6 +12,7 @@ public:
 	void drawOctagon(Shader shader);
     void drawRoof(Shader shader);
     void drawCylinder(Shader shader);
+    void drawSphere(Shader shader);
 private:
     Shape shape;
 };
@@ -65,6 +66,31 @@ void Renderer::drawCylinder(Shader shader) {
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
         model = glm::rotate(model, glm::radians(24.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    }
+}
+void Renderer::drawSphere(Shader shader) {
+    std::vector<TexVertex> vertices = shape.texRegtangle;
+    glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(TexVertex), vertices.data());
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.0, 6.0f, 3.69f));
+    model = glm::scale(model, glm::vec3(0.95, 1.425, 0.95f));
+    shader.setMat4("model", model);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    for (int i = 0; i < 32; i++) {
+        glm::mat4 temp = model;
+        for (int j = 0; j < 24; j++) {
+            model = glm::translate(model, glm::vec3(0.0f, .25f, 0.0f));
+            model = glm::rotate(model, glm::radians(7.5f), glm::vec3(1.0f, 0.0f, 0.0f));
+            model = glm::translate(model, glm::vec3(0.0f, .25f, 0.0f));
+            shader.setMat4("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        }
+        model = temp;
+        model = glm::translate(model, glm::vec3(-.5f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(11.25f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(-.5f, 0.0f, 0.0f));
         shader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     }

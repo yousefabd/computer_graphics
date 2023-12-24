@@ -19,8 +19,8 @@ const unsigned int SCR_HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
-
+//Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool firstMouse = true;
 float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 float pitch = 0.0f;
@@ -144,6 +144,7 @@ int main()
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+        ourShader.setBool("useTexture", true);
 
         // input
         // -----
@@ -168,6 +169,9 @@ int main()
         renderer.drawRoof(ourShader);
         texture.activate(mosque_cylinder, GL_TEXTURE0);
         renderer.drawCylinder(ourShader);
+        ourShader.setBool("useTexture", false);
+        ourShader.setVec3("u_Color", glm::vec3(1.0f, 1.0f, 0.0f));
+        renderer.drawSphere(ourShader);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
