@@ -1,3 +1,9 @@
-﻿  glad.c
-glfw3.lib(context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(context.obj)' or at ''; linking object as if no debug info
-  ComputerGraphics.vcxproj -> C:\Users\ASUS\Documents\GitHub\computer_graphics\x64\Debug\ComputerGraphics.exe
+﻿  ComputerGraphics.cpp
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Shape.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(32,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(38,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(47,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(53,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(63,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(69,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  ComputerGraphics.vcxproj -> C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\ComputerGraphics.exe

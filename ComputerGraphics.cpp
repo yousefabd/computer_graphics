@@ -19,7 +19,7 @@ const unsigned int SCR_HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-Camera camera(glm::vec3(0.0f, 0.0f, 5.0f));
+Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
 
 bool firstMouse = true;
 float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
@@ -131,6 +131,8 @@ int main()
     // load and create a texture 
     // -------------------------
     unsigned int mosque_wall=texture.genTexture("images/building-wall-outside.jpg");
+    unsigned int mosque_roof= texture.genTexture("images/mosque_roof2.jpg");
+    unsigned int mosque_cylinder = texture.genTexture("images/cylinder.jpg");
     ourShader.use();
     ourShader.setInt("texture1", 0);
     // render loop
@@ -149,9 +151,6 @@ int main()
         // clear buffer and depth
         // ------
         renderer.clear();
-
-        // bind textures on corresponding texture units
-        texture.activate(mosque_wall, GL_TEXTURE0);
         // activate shader
         ourShader.use();
 
@@ -163,8 +162,12 @@ int main()
 
         // render boxes
         renderer.bind(VAO,VBO,ourShader);
-        renderer.drawOctagon(vertices.size(), ourShader);
-
+        texture.activate(mosque_wall, GL_TEXTURE0);
+        renderer.drawOctagon(ourShader);
+        texture.activate(mosque_roof, GL_TEXTURE0);
+        renderer.drawRoof(ourShader);
+        texture.activate(mosque_cylinder, GL_TEXTURE0);
+        renderer.drawCylinder(ourShader);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
