@@ -170,7 +170,7 @@ int main()
         texture.activate(mosque_cylinder, GL_TEXTURE0);
         renderer.drawCylinder(ourShader);
         ourShader.setBool("useTexture", false);
-        ourShader.setVec3("u_Color", glm::vec3(1.0f, 1.0f, 0.0f));
+        ourShader.setVec3("u_Color", glm::vec3(1.0f, .647f, 0.0f));
         renderer.drawSphere(ourShader);
         glfwSwapBuffers(window);
         glfwPollEvents();
