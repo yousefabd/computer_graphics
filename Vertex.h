@@ -4,4 +4,5 @@ struct TexVertex {
 	glm::vec3 position;
 	glm::vec2 texCoords;
 };
+
 #endif

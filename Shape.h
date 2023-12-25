@@ -19,6 +19,7 @@ public:
 		{glm::vec3(-0.5f,  0.5f, 0.0f),  glm::vec2(0.0f, 4.0f)},
 		{glm::vec3(0.0f,0.85f,1.2071067812), glm::vec2(2.0f,4.0f)}
 	};
+
 };
 
 #endif

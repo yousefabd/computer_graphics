@@ -7,6 +7,7 @@ in vec2 TexCoord;
 uniform sampler2D texture1;
 uniform bool useTexture;
 uniform vec3 u_Color;
+
 void main()
 {
 	if(useTexture){

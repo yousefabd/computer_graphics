@@ -20,6 +20,7 @@ private:
 		}
 		stbi_image_free(image);
 	}
+
 public:
 	unsigned int genTexture(std::string image_path) {
 		unsigned int texture;

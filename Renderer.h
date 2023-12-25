@@ -5,6 +5,7 @@
 #include <glm/glm/glm.hpp>
 #include "Shape.h"
 #include "Vertex.h"
+
 class Renderer {
 public:
 	void clear() const;
