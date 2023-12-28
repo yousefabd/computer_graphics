@@ -14,9 +14,12 @@ public:
     void drawRoof(Shader shader,glm::vec3 position);
     void drawCylinder(Shader shader,glm::vec3 position);
     void drawSphere(Shader shader,glm::vec3 position);
-    void drawOutside(Shader shader,glm::vec3 position);
+    void drawWall(Shader shader, glm::vec3 position);
+    
 private:
     Shape shape;
+    void drawWallside(Shader shader, glm::vec3 position,glm::mat4 model);
+    void drawMiniwall(Shader shader, glm::vec3 position,glm::mat4 model);
 };
 void Renderer::clear() const{
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -101,22 +104,47 @@ void Renderer::drawSphere(Shader shader,glm::vec3 position) {
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     }
 }
-void Renderer::drawOutside(Shader shader, glm::vec3 position) {
+void Renderer::drawWallside(Shader shader, glm::vec3 position,glm::mat4 model) {
     std::vector<TexVertex> vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-    glm::mat4 model = glm::mat4(1.0f);
+   // glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
-    model = glm::scale(model, glm::vec3(1.0f,1.0f,0.15f));
+    model = glm::scale(model, glm::vec3(1.0f, 1.0f, 0.3f));
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, 3.0f));
-  
+
     shader.setMat4("model", model);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     //fuc
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
         shader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        drawMiniwall(shader, position, model);
+    }
+}
+void Renderer::drawMiniwall(Shader shader, glm::vec3 position,glm::mat4 model) {
+    std::vector<TexVertex> vertices = shape.texCube1;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    
+    model = glm::translate(model, position);
+    model = glm::scale(model, glm::vec3(0.7f, 0.3f, 0.5f));
+    model = glm::translate(model, glm::vec3(0.0f, 2.0f, 0.0f));
+
+    shader.setMat4("model", model);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    //fuc
+    
+}
+void::Renderer::drawWall(Shader shader, glm::vec3 position) {
+    std::vector<TexVertex> vertices = shape.texCube1;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glm::mat4 model = glm::mat4(1.0f);
+    for (int i = 0; i < 4; i++) {
+        drawWallside(shader, position,model);
+        model = glm::translate(model, glm::vec3(-10.5f, 0.0f, -3.0f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(-4.4f, 0.0f, 0.0f));
     }
 }
 #endif
