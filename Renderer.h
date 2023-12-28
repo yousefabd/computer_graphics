@@ -111,6 +111,7 @@ void Renderer::drawOutside(Shader shader, glm::vec3 position) {
   
     shader.setMat4("model", model);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    //fuc
     for (int i = 0; i < 10; i++) {
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
         model = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
