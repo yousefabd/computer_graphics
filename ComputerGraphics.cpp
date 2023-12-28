@@ -21,6 +21,8 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 // Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+glm::vec3 mosque_position = glm::vec3(-70.0f,0.0f, 100.0);
+glm::vec3 wall_position = glm::vec3(-20.0f, 0.0f, -10.0f);
 bool firstMouse = true;
 float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 float pitch = 0.0f;
@@ -107,7 +109,7 @@ int main()
     Shader ourShader("vertexShader.vs", "fragmentShader.fs");
     Shape shape;
     Renderer renderer;
-    Texture texture;
+    Texture texture; 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     std::vector<TexVertex> vertices = shape.texRegtangle;
@@ -133,6 +135,7 @@ int main()
     unsigned int mosque_wall=texture.genTexture("images/building-wall-outside.jpg");
     unsigned int mosque_roof= texture.genTexture("images/mosque_roof2.jpg");
     unsigned int mosque_cylinder = texture.genTexture("images/cylinder.jpg");
+    unsigned int wall = texture.genTexture("images/wall.jpg");
     ourShader.use();
     ourShader.setInt("texture1", 0);
     // render loop
@@ -156,7 +159,7 @@ int main()
         ourShader.use();
 
         // pass projection matrix to shader (note that in this case it could change every frame)
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
@@ -164,14 +167,17 @@ int main()
         // render boxes
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(mosque_wall, GL_TEXTURE0);
-        renderer.drawOctagon(ourShader);
+        renderer.drawOctagon(ourShader,mosque_position);
         texture.activate(mosque_roof, GL_TEXTURE0);
-        renderer.drawRoof(ourShader);
+        renderer.drawRoof(ourShader,mosque_position);
         texture.activate(mosque_cylinder, GL_TEXTURE0);
-        renderer.drawCylinder(ourShader);
+        renderer.drawCylinder(ourShader,mosque_position);
         ourShader.setBool("useTexture", false);
         ourShader.setVec3("u_Color", glm::vec3(1.0f, .647f, 0.0f));
-        renderer.drawSphere(ourShader);
+        renderer.drawSphere(ourShader,mosque_position);
+        ourShader.setBool("useTexture", true);
+        texture.activate(wall, GL_TEXTURE0);
+        renderer.drawOutside(ourShader,wall_position);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
