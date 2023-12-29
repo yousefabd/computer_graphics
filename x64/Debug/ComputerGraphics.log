@@ -1,16 +1,18 @@
 ﻿  ComputerGraphics.cpp
 C:\Users\LEGION\Source\Repos\ComputerGraphics\Shape.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(32,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(54,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(60,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(70,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(76,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(87,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(93,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(118,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(125,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(137,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(143,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(155,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(158,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(33,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(57,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(63,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(73,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(79,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(90,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(96,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(121,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(128,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(141,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(147,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(160,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(186,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(189,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+glad.obj : warning LNK4204: 'C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
   ComputerGraphics.vcxproj -> C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\ComputerGraphics.exe

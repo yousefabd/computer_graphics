@@ -177,6 +177,9 @@ int main()
         ourShader.setBool("useTexture", true);
         texture.activate(stone, GL_TEXTURE0);
         renderer.drawGate(ourShader,wall_position);
+        texture.activate(wall, GL_TEXTURE0);
+        renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
+       // renderer.drawOutside(ourShader,wall_position);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
