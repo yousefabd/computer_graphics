@@ -19,16 +19,14 @@ const unsigned int SCR_HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-// Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+//Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
+Camera camera(glm::vec3(-90.0f, 0.0f, 150.0f));
 glm::vec3 mosque_position = glm::vec3(-70.0f,0.0f, 100.0);
 glm::vec3 wall_position = glm::vec3(-20.0f, 0.0f, -10.0f);
 bool firstMouse = true;
-float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-float pitch = 0.0f;
+
 float lastX = 800.0f / 2.0;
 float lastY = 600.0 / 2.0;
-float fov = 45.0f;
 
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
@@ -136,6 +134,7 @@ int main()
     unsigned int mosque_roof= texture.genTexture("images/mosque_roof2.jpg");
     unsigned int mosque_cylinder = texture.genTexture("images/cylinder.jpg");
     unsigned int wall = texture.genTexture("images/wall.jpg");
+    unsigned int stone = texture.genTexture("images/stone.jpg");
     ourShader.use();
     ourShader.setInt("texture1", 0);
     // render loop
@@ -176,8 +175,8 @@ int main()
         ourShader.setVec3("u_Color", glm::vec3(1.0f, .647f, 0.0f));
         renderer.drawSphere(ourShader,mosque_position);
         ourShader.setBool("useTexture", true);
-        texture.activate(wall, GL_TEXTURE0);
-        renderer.drawOutside(ourShader,wall_position);
+        texture.activate(stone, GL_TEXTURE0);
+        renderer.drawGate(ourShader,wall_position);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
