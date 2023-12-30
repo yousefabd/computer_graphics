@@ -16,7 +16,7 @@ private:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		}
 		else {
-			std::cout << "failed to load image\n";
+			std::cout << "failed to load image\n" <<path;
 		}
 		stbi_image_free(image);
 	}
