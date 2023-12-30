@@ -90,7 +90,6 @@ int main()
     unsigned int sandstone_brick = texture.genTexture("images/sandstone-brick.jpg");
     unsigned int windowed_wall = texture.genTexture("images/wall-windowed.jpeg");
     unsigned int entrance_wall = texture.genTexture("images/entrance-wall.jpg");
-
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     std::vector<TexVertex> vertices = shape.texRegtangle;
@@ -115,6 +114,7 @@ int main()
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
+    std::vector<unsigned int>mosqueTextures = { windowed_wall,sandstone_brick };
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -141,14 +141,14 @@ int main()
         ourShader.setMat4("projection", projection);
 
         // render boxes
-        renderer.drawRockDome(ourShader, texture, glm::vec3(1.0f), glm::vec3(0.2f), rockdomeTextures);
+        //renderer.drawRockDome(ourShader, texture, glm::vec3(1.0f), glm::vec3(0.2f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
         renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
         //renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
-        renderer.drawMinaret(ourShader,texture,glm::vec3(0.0f), glm::vec3(6.0f),minaretTextures);
-       // renderer.drawOutside(ourShader,wall_position);
+        //renderer.drawMinaret(ourShader,texture,glm::vec3(0.0f), glm::vec3(6.0f),minaretTextures);
+        renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

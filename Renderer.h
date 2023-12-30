@@ -15,6 +15,7 @@ public:
     void drawGate(Shader,glm::vec3 );
     void drawWall(Shader, glm::vec3 ,glm::vec3 );
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
+    void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -252,5 +253,36 @@ void Renderer::drawMinaret(Shader shader,Texture texture, glm::vec3 position, gl
     model = glm::scale(model, glm::vec3(0.1, 2.0f, 0.1f));
     model = glm::translate(model, glm::vec3(0.0f, 0.4f, -5.0f));
     drawSphere(shader, model);
+}
+void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, glm::vec3 scale, std::vector<unsigned int>textures) {
+    std::vector<TexVertex>vertices = shape.texCube1;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glm::mat4 model = glm::mat4(1.0f);
+
+    model = glm::translate(model, position);
+    model = glm::scale(model, scale);
+    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.1f));
+    texture.activate(textures[0],GL_TEXTURE0);
+    for (int i = 0; i < 5; i++) {
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    }
+    model = glm::mat4(1.0f);
+    model = glm::translate(model, position );
+    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::scale(model, scale);
+    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
+    model = glm::translate(model, glm::vec3(.46f,0.0f,2.35f));
+    shader.setMat4("model",model);
+    texture.activate(textures[1], GL_TEXTURE0);
+    drawArch(shader, model);
+    for (int i = 0; i < 2; i++) {
+        model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+        drawArch(shader, model);
+    }
+    //glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    //glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
 }
 #endif
