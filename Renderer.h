@@ -149,6 +149,18 @@ private:
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
         }
     }
+    void drawWallSide2(Shader shader, glm::mat4 model,float angle,glm::vec3 position,glm::vec3 scale,int count,bool axis) {
+        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f*!axis, 1.0f*axis, 0.0f));
+        model = glm::translate(model, position);
+        model = glm::scale(model, scale);
+        model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.1f));
+        std::vector<TexVertex> vertices = shape.texCube1;
+        for (int i = 0; i < count; i++) {
+            model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+            shader.setMat4("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        }
+    }
 };
 void Renderer::clear() const{
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -258,31 +270,41 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     std::vector<TexVertex>vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     glm::mat4 model = glm::mat4(1.0f);
-
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
-    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.1f));
-    texture.activate(textures[0],GL_TEXTURE0);
-    for (int i = 0; i < 5; i++) {
-        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
-        shader.setMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-    }
-    model = glm::mat4(1.0f);
-    model = glm::translate(model, position );
-    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-    model = glm::scale(model, scale);
-    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
-    model = glm::translate(model, glm::vec3(.46f,0.0f,2.35f));
-    shader.setMat4("model",model);
+    texture.activate(textures[0], GL_TEXTURE0);
+    drawWallSide2(shader, model,0.0f,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f),7,1);
     texture.activate(textures[1], GL_TEXTURE0);
-    drawArch(shader, model);
-    for (int i = 0; i < 2; i++) {
-        model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -2.3f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
+    texture.activate(textures[2], GL_TEXTURE0);
+    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.9f), glm::vec3(1.0f,1.3f,1.0f), 6,1);
+    texture.activate(textures[3], GL_TEXTURE0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 4.5f, -0.71f), glm::vec3(1.05f, 7.4f, 4.0f), 6, 0);
+    texture.activate(textures[4], GL_TEXTURE0);
+    glm::mat4 temp = model;
+    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
+    model = glm::translate(model, glm::vec3(.48f,0.0f,2.85f));
+    for (int i = 0; i < 5; i++) {
         drawArch(shader, model);
+        model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+        if (i == 2) {
+            model = glm::translate(model, glm::vec3(1.4f, 0.0f, 0.0f));
+        }
     }
-    //glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-    //glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    model = glm::translate(model, glm::vec3(-3.2f, 0.2f, 0.0f));
+    model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.0f));
+    drawArch(shader, model);
+    model = temp;
+    model = glm::translate(model, glm::vec3(-2.2f, 0.0f, 0.6f));
+    model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
+    model = glm::translate(model, glm::vec3(.48f, 0.0f, 2.85f));
+    for (int i = 0; i < 5; i++) {
+        drawArch(shader, model);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 4.72f));
+        if(i==2)
+            model= model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.7f));
+    }
 
 }
 #endif
