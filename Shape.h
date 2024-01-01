@@ -68,13 +68,13 @@ private:
     }
 public:
     std::vector<TexVertex> texRegtangle{
-        {glm::vec3(-0.5f, -0.5f, 0.0f),  glm::vec2(0.0f, 0.0f)},//bottom left
-        {glm::vec3(0.5f, -0.5f, 0.0f),  glm::vec2(1.0f, 0.0f)}, //bottom right
-        {glm::vec3(0.5f,  0.5f, 0.0f),  glm::vec2(1.0f, 1.0f)}, //top right
+          {glm::vec3(-0.5f, -0.5f, 0.0f),  glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,1.0f)},//bottom left
+        {glm::vec3(0.5f, -0.5f, 0.0f),  glm::vec2(1.0f, 0.0f), glm::vec3(0.0f,0.0f,1.0f)},//bottom right
+        {glm::vec3(0.5f,  0.5f, 0.0f),  glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f)},//top rigght
 
-        {glm::vec3(0.5f,  0.5f, 0.0f),  glm::vec2(1.0f, 1.0f)}, //top right
-        {glm::vec3(-0.5f,  0.5f, 0.0f),  glm::vec2(0.0f, 1.0f)},//top left
-        {glm::vec3(-0.5f, -0.5f, 0.0f),  glm::vec2(0.0f, 0.0f)},//bottom left
+        {glm::vec3(0.5f,  0.5f, 0.0f),  glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f)}, //top right
+        {glm::vec3(-0.5f,  0.5f, 0.0f),  glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f)},//top left
+        {glm::vec3(-0.5f, -0.5f, 0.0f),  glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,1.0f) }//bottom left
     };
     std::vector<TexVertex> texTriangle{
         {glm::vec3(0.5f,  0.5f, 0.0f),  glm::vec2(4.0f, 0.0f)},
@@ -83,47 +83,47 @@ public:
     };
     std::vector<TexVertex> texCube1{
         //back
-        {glm::vec3(-0.5f, -0.5f, -0.5f),  glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
-        {glm::vec3(0.5f,  0.5f, -0.5f), glm::vec2(1.0f, 1.0f) },
-        {glm::vec3(0.5f,  0.5f, -0.5f),  glm::vec2(1.0f, 1.0f)},
-        {glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec2(0.0f, 1.0f) },
-        {glm::vec3(-0.5f, -0.5f, -0.5f),  glm::vec2(0.0f, 0.0f)},
+        {glm::vec3(-0.5f, -0.5f, -0.5f),  glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,-1.0f)},
+        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f),glm::vec3(0.0f,0.0f,-1.0f)},
+        {glm::vec3(0.5f,  0.5f, -0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,-1.0f) },
+        {glm::vec3(0.5f,  0.5f, -0.5f),  glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,-1.0f)},
+        {glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,0.0f,-1.0f) },
+        {glm::vec3(-0.5f, -0.5f, -0.5f),  glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,-1.0f)},
         //front
-        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(0.5f, -0.5f,  0.5f),glm::vec2(1.0f, 0.0f) },
-        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 1.0f)},
-        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 1.0f) },
-        {glm::vec3(-0.5f,  0.5f,  0.5f),glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f) },
+        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,1.0f)},
+        {glm::vec3(0.5f, -0.5f,  0.5f),glm::vec2(1.0f, 0.0f),glm::vec3(0.0f,0.0f,1.0f) },
+        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f)},
+        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f) },
+        {glm::vec3(-0.5f,  0.5f,  0.5f),glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,0.0f,1.0f)},
+        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,0.0f,1.0f)},
         //left
-        {glm::vec3(-0.5f,  0.5f,  0.5f),glm::vec2(1.0f, 0.0f)},
-        {glm::vec3(-0.5f,  0.5f, -0.5f),glm::vec2(1.0f, 1.0f)},
-        { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(-0.5f, -0.5f, -0.5f),glm::vec2(0.0f, 1.0f)},
-        { glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(-0.5f,  0.5f,  0.5f),  glm::vec2(1.0f, 0.0f)},
+        {glm::vec3(-0.5f,  0.5f,  0.5f),glm::vec2(1.0f, 0.0f),glm::vec3(-1.0f,0.0f,0.0f)},
+        {glm::vec3(-0.5f,  0.5f, -0.5f),glm::vec2(1.0f, 1.0f),glm::vec3(-1.0f,0.0f,0.0f)},
+        { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(-1.0f,0.0f,0.0f)},
+        {glm::vec3(-0.5f, -0.5f, -0.5f),glm::vec2(0.0f, 1.0f),glm::vec3(-1.0f,0.0f,0.0f)},
+        { glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 0.0f),glm::vec3(-1.0f,0.0f,0.0f)},
+        {glm::vec3(-0.5f,  0.5f,  0.5f),  glm::vec2(1.0f, 0.0f),glm::vec3(-1.0f,0.0f,0.0f)},
         //right
-        {glm::vec3(0.5f,  0.5f,  0.5f),  glm::vec2(1.0f, 0.0f)},
-        {glm::vec3(0.5f,  0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
-        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 0.0f)},
+        {glm::vec3(0.5f,  0.5f,  0.5f),  glm::vec2(1.0f, 0.0f),glm::vec3(1.0f,0.0f,0.0f)},
+        {glm::vec3(0.5f,  0.5f, -0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(1.0f,0.0f,0.0f)},
+        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(1.0f,0.0f,0.0f)},
+        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(1.0f,0.0f,0.0f)},
+        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 0.0f),glm::vec3(1.0f,0.0f,0.0f)},
+        {glm::vec3(0.5f,  0.5f,  0.5f), glm::vec2(1.0f, 0.0f),glm::vec3(1.0f,0.0f,0.0f)},
         //bottom
-        {glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
-        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(1.0f, 0.0f) },
-        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(1.0f, 0.0f)},
-        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
+        {glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,-1.0f,0.0f)},
+        {glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,-1.0f,0.0f)},
+        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(1.0f, 0.0f),glm::vec3(0.0f,-1.0f,0.0f) },
+        {glm::vec3(0.5f, -0.5f,  0.5f), glm::vec2(1.0f, 0.0f),glm::vec3(0.0f,-1.0f,0.0f)},
+        {glm::vec3(-0.5f, -0.5f,  0.5f),glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,-1.0f,0.0f)},
+        {glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,-1.0f,0.0f)},
         //top
-        {glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
-        {glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
-        {glm::vec3(0.5f, 0.5f,  0.5f), glm::vec2(1.0f, 1.0f) },
-        {glm::vec3(0.5f, 0.5f,  0.5f), glm::vec2(1.0f, 1.0f)},
-        {glm::vec3(-0.5f, 0.5f,  0.5f),glm::vec2(0.0f, 1.0f)},
-        {glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
+        {glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,1.0f,0.0f)},
+        {glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 0.0f),glm::vec3(0.0f,1.0f,0.0f)},
+        {glm::vec3(0.5f, 0.5f,  0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,1.0f,0.0f)},
+        {glm::vec3(0.5f, 0.5f,  0.5f), glm::vec2(1.0f, 1.0f),glm::vec3(0.0f,1.0f,0.0f)},
+        {glm::vec3(-0.5f, 0.5f,  0.5f),glm::vec2(0.0f, 1.0f),glm::vec3(0.0f,1.0f,0.0f)},
+        {glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 0.0f),glm::vec3(0.0f,1.0f,0.0f)},
     };
     std::vector<TexVertex>arch = arch2();
 };
