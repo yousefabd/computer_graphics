@@ -43,5 +43,7 @@
     <None Include="fragmentShader.fs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="light_cube.vs" />
+    <None Include="light_cube.fs" />
   </ItemGroup>
 </Project>

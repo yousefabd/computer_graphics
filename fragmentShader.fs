@@ -35,7 +35,7 @@ void main()
 {
     //making vectors
     vec3 norm=normalize(normal);
-		vec3 lightdir=normalize(Lpos-FragPos);
+		vec3 lightdir=normalize(FragPos-light.position);
          float ambient_power=0.5f;
          float diff=max(dot(norm,lightdir),0.0f);
 	if(useTexture){
@@ -47,7 +47,7 @@ void main()
         //----------------------------------------------------------------
         //diffuse
         
-        vec3 diffuse = vec3(diff*texture(mat.diffuse,TexCoord)*light.diffuse);
+        vec3 diffuse = light.diffuse*diff*texture(mat.diffuse,TexCoord).rgb;
         //---------------------------------------------------------------------
         vec3 result=ambience+diffuse;
         FragColor=vec4(result,1.0f);

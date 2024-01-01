@@ -16,6 +16,7 @@ public:
     void drawWall(Shader, glm::vec3 ,glm::vec3 );
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
+    void drawcube(Shader,glm::vec3);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -269,22 +270,23 @@ void Renderer::drawMinaret(Shader shader,Texture texture, glm::vec3 position, gl
 void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, glm::vec3 scale, std::vector<unsigned int>textures) {
     std::vector<TexVertex>vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    shader.setBool("useTexture", true);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
     texture.activate(textures[0], GL_TEXTURE0);
-    drawWallSide2(shader, model,0.0f,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f),7,1);
+    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), 7, 1);
     texture.activate(textures[1], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -2.3f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
     texture.activate(textures[2], GL_TEXTURE0);
-    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.9f), glm::vec3(1.0f,1.3f,1.0f), 6,1);
+    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.9f), glm::vec3(1.0f, 1.3f, 1.0f), 6, 1);
     texture.activate(textures[3], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 4.5f, -0.71f), glm::vec3(1.05f, 7.4f, 4.0f), 6, 0);
     texture.activate(textures[4], GL_TEXTURE0);
     glm::mat4 temp = model;
     model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
-    model = glm::translate(model, glm::vec3(.48f,0.0f,2.85f));
+    model = glm::translate(model, glm::vec3(.48f, 0.0f, 2.85f));
     for (int i = 0; i < 5; i++) {
         drawArch(shader, model);
         model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -302,9 +304,19 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     for (int i = 0; i < 5; i++) {
         drawArch(shader, model);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 4.72f));
-        if(i==2)
-            model= model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.7f));
+        if (i == 2)
+            model = model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.7f));
     }
 
-}
+};
+void Renderer::drawcube(Shader shader, glm::vec3 pos) {
+    std::vector<TexVertex> vertices = shape.texCube1;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, pos);
+    //model = glm::scale(model, glm::vec3(0.0f));
+    shader.setMat4("model", model);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+};
 #endif

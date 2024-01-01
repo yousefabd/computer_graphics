@@ -77,6 +77,7 @@ int main()
     // build and compile our shader program
     // ------------------------------------
     Shader ourShader("vertexShader.vs", "fragmentShader.fs");
+    Shader light_shader("light_cube.vs", "light_cube.fs");
     Shape shape;
     Renderer renderer;
     Texture texture; 
@@ -97,7 +98,7 @@ int main()
     // ------------------------------------------------------------------
     std::vector<TexVertex> vertices = shape.texRegtangle;
     // world space positions of our cubes
-    unsigned int VBO, VAO;
+    unsigned int VBO, VAO, LVAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -116,6 +117,16 @@ int main()
     glEnableVertexAttribArray(2);
     ourShader.use();
     ourShader.setInt("mat.diffuse", 0);
+
+    glGenVertexArrays(1, &LVAO);
+    glBindVertexArray(LVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(TexVertex), vertices.data(), GL_STATIC_DRAW);
+
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)0);
+    glEnableVertexAttribArray(0);
+    light_shader.use();
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
@@ -137,12 +148,14 @@ int main()
         // clear buffer and depth
         // ------
         renderer.clear();
+        glBindVertexArray(VAO);
         ourShader.use();
 
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 lightposition = wall_position;
-        lightposition = glm::vec3(lightposition.x * glm::cos(glm::radians(glfwGetTime())), lightposition.y, lightposition .z * glm::sin(glm::radians(glfwGetTime())));
-        ourShader.setVec3("lightpos", lightposition);
+        glm::vec3 lightposition = glm::vec3(1.0f);
+        //glm::vec3 lightposition = glm::vec3(glm::cos(glm::radians(glfwGetTime())), 0, glm::sin(glm::radians(glfwGetTime())));
+        //std::cout << glfwGetTime() << std::endl;
+        ourShader.setVec3("light.position", lightposition);
         glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
         ourShader.setVec3("light.ambient", ambientColor);
@@ -159,14 +172,19 @@ int main()
         ourShader.setMat4("projection", projection);
 
         // render boxes
-        renderer.drawRockDome(ourShader, texture, glm::vec3(1.0f), glm::vec3(0.2f), rockdomeTextures);
+        //renderer.drawRockDome(ourShader, texture, glm::vec3(1.0f), glm::vec3(0.2f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
         renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
         //renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
         //renderer.drawMinaret(ourShader,texture,glm::vec3(0.0f), glm::vec3(6.0f),minaretTextures);
-        renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
+       renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
+        renderer.bind(LVAO, VBO, light_shader);
+        light_shader.use();
+        light_shader.setMat4("view", view);
+        light_shader.setMat4("projection", projection); 
+        renderer.drawcube(light_shader, lightposition);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
