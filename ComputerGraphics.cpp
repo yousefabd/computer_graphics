@@ -156,8 +156,9 @@ int main()
         ourShader.use();
         //lighting
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 lightposition = glm::vec3(1.0f);
-        //glm::vec3 lightposition = glm::vec3(glm::cos(glm::radians(glfwGetTime())), 0, glm::sin(glm::radians(glfwGetTime())));
+        glm::vec3 lightposition = glm::vec3(2.0f);
+        lightposition.y = cos(glfwGetTime() / 2.0f) * 25.0f;
+        lightposition.z = sin(glfwGetTime() / 2.0f) * 25.0f;
         //std::cout << glfwGetTime() << std::endl;
         ourShader.setVec3("light.position", lightposition);
         glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
