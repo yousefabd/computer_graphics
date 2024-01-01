@@ -115,8 +115,11 @@ int main()
     // texture coord attribute
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3)));
     glEnableVertexAttribArray(1); 
+    //normal vec attribute
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3) + sizeof(glm::vec2)));
+    glEnableVertexAttribArray(2);
     ourShader.use();
-    ourShader.setInt("texture1", 0);
+    ourShader.setInt("mat.diffuse", 0);
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
@@ -139,6 +142,18 @@ int main()
         // ------
         renderer.clear();
         ourShader.use();
+        //lighting
+        glm::vec3 lightColor = glm::vec3(1.0f);
+        glm::vec3 lightposition = wall_position;
+        lightposition = glm::vec3(lightposition.x * glm::cos(glm::radians(glfwGetTime())), lightposition.y, lightposition.z * glm::sin(glm::radians(glfwGetTime())));
+        ourShader.setVec3("lightpos", lightposition);
+        glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+        ourShader.setVec3("light.ambient", ambientColor);
+        ourShader.setVec3("light.diffuse", diffuseColor);
+        ourShader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+        ourShader.setVec3("matt2.diffuse", 1.0f, 1.0f, 1.0f);
+        ourShader.setFloat("mat.shine", 0.5f);
 
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
