@@ -96,19 +96,19 @@ private:
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
         }
     }
-    void drawSphere(Shader shader, glm::mat4 model) {
+    void drawSphere(Shader shader, glm::mat4 model,glm::vec3 color) {
         std::vector<TexVertex> vertices = shape.texRegtangle;
         glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
         for (int i = 0; i < 32; i++) {
             glm::mat4 temp = model;
-            shader.setVec3("u_Color", glm::vec3(1.0f, 0.8f, 0.0f));
+            shader.setVec3("u_Color", glm::vec3(color.x,color.y+0.075f,color.z));
             drawCubes(shader,model);
             if (i % 8 == 0) {
                 model = glm::translate(model, glm::vec3(0.0f, 0.0f, 10.45f));
                 drawCubes(shader,model);
                 model = temp;
             }
-            shader.setVec3("u_Color", glm::vec3(1.0f, .647f, 0.0f));
+            shader.setVec3("u_Color", color);
             for (int j = 0; j < 24; j++) {
                 model = glm::translate(model, glm::vec3(0.0f, .25f, 0.0f));
                 model = glm::rotate(model, glm::radians(7.5f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -177,13 +177,12 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     unsigned int mosque_cylinder = textures[2];
     //sphere
     shader.setBool("useTexture", false);
-    shader.setVec3("u_Color", glm::vec3(1.0f, .647f, 0.0f));
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
     model = glm::translate(model,position);
     model = glm::translate(model, glm::vec3(0.0, 6.0f, 3.69f));
     model = glm::scale(model, glm::vec3(0.95, 1.425, 0.95f));
-    drawSphere(shader, model);
+    drawSphere(shader, model, glm::vec3(1.0f, .647f, 0.0f));
     shader.setBool("useTexture", true);
     //cylinder
     texture.activate(mosque_cylinder, GL_TEXTURE0);
@@ -265,7 +264,7 @@ void Renderer::drawMinaret(Shader shader,Texture texture, glm::vec3 position, gl
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     model = glm::scale(model, glm::vec3(0.1, 2.0f, 0.1f));
     model = glm::translate(model, glm::vec3(0.0f, 0.4f, -5.0f));
-    drawSphere(shader, model);
+    drawSphere(shader, model,glm::vec3(0.0f));
 }
 void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, glm::vec3 scale, std::vector<unsigned int>textures) {
     std::vector<TexVertex>vertices = shape.texCube1;
@@ -275,14 +274,21 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
     texture.activate(textures[0], GL_TEXTURE0);
-    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f), 7, 1);
+
+    drawWallSide2(shader, model,0.0f,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f),6,1);
     texture.activate(textures[1], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -2.3f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
     texture.activate(textures[2], GL_TEXTURE0);
     drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.9f), glm::vec3(1.0f, 1.3f, 1.0f), 6, 1);
     texture.activate(textures[3], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 4.5f, -0.71f), glm::vec3(1.05f, 7.4f, 4.0f), 6, 0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 5.17f, -1.0f), glm::vec3(1.05f, 1.75f, 5.0f), 6, 0);
     texture.activate(textures[4], GL_TEXTURE0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 2.1f, -0.94), glm::vec3(1.05f, 3.37f, 0.5f), 6, 0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 5.14f, -1.3f), glm::vec3(1.05f, 1.69f, 0.5f), 6, 0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 7.6f, -0.94), glm::vec3(1.05f, 2.2f, 0.5f), 6, 0);
+
+    texture.activate(textures[5], GL_TEXTURE0);
     glm::mat4 temp = model;
     model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::scale(model, glm::vec3(1.4f, 1.2f, 0.3f));
@@ -294,8 +300,8 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
             model = glm::translate(model, glm::vec3(1.4f, 0.0f, 0.0f));
         }
     }
-    model = glm::translate(model, glm::vec3(-3.2f, 0.2f, 0.0f));
-    model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.0f));
+    model = glm::translate(model, glm::vec3(-3.2f, 0.0f, 0.0f));
+    model = glm::scale(model, glm::vec3(1.4f, 1.0f, 1.0f));
     drawArch(shader, model);
     model = temp;
     model = glm::translate(model, glm::vec3(-2.2f, 0.0f, 0.6f));
@@ -307,8 +313,18 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
         if (i == 2)
             model = model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.7f));
     }
+        model = glm::translate(model, glm::vec3(-3.0f, 1.3f, -16.5f));
+    model = glm::scale(model, glm::vec3(0.35f, 0.4f, 1.5f));
+    texture.activate(textures[6],GL_TEXTURE0);
+    drawCylinder(shader, model);
+    model = glm::translate(model, glm::vec3(0.0f, .72f, 0.0f));
+    model = glm::scale(model,glm::vec3(0.47f));
+    shader.setBool("useTexture", false);
+    drawSphere(shader, model,glm::vec3(0.55f,0.55f,0.55f));
+}
+    
 
-};
+
 void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     std::vector<TexVertex> vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
@@ -319,4 +335,5 @@ void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 };
+
 #endif

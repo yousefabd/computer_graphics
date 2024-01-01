@@ -88,12 +88,15 @@ int main()
     unsigned int mosque_cylinder = texture.genTexture("images/cylinder.jpg");
     unsigned int stone_brick = texture.genTexture("images/stone-brick.jpg");
     unsigned int quartz = texture.genTexture("images/quartz.jpg");
-    unsigned int sandstone_brick = texture.genTexture("images/sandstone-brick.jpg");
+    unsigned int sandstone_brick = texture.genTexture("images/test.jpg");
     unsigned int windowed_wall = texture.genTexture("images/wall-windowed.jpeg");
     unsigned int entrance_wall = texture.genTexture("images/entrance-wall.jpg");
     unsigned int entrance_wall2= texture.genTexture("images/arch-wall.jpg");
     unsigned int wall2 = texture.genTexture("images/wall2.jpg");
     unsigned int arch_frame = texture.genTexture("images/arch-frame.jpg");
+    unsigned int sandstone = texture.genTexture("images/sandstone.jpg");
+    unsigned int smooth_stone = texture.genTexture("images/smooth-stone.jpg");
+    unsigned int mosque_cylinder2 = texture.genTexture("images/test.jpg");
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     std::vector<TexVertex> vertices = shape.texRegtangle;
@@ -111,9 +114,10 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)0);
     glEnableVertexAttribArray(0);
     // texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3)));
     glEnableVertexAttribArray(1); 
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3)+sizeof(glm::vec2)));
+    //normal vec attribute
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)(sizeof(glm::vec3) + sizeof(glm::vec2)));
     glEnableVertexAttribArray(2);
     ourShader.use();
     ourShader.setInt("mat.diffuse", 0);
@@ -130,7 +134,7 @@ int main()
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
-    std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone_brick,arch_frame};
+    std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2};
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -150,7 +154,7 @@ int main()
         renderer.clear();
         glBindVertexArray(VAO);
         ourShader.use();
-
+        //lighting
         glm::vec3 lightColor = glm::vec3(1.0f);
         glm::vec3 lightposition = glm::vec3(1.0f);
         //glm::vec3 lightposition = glm::vec3(glm::cos(glm::radians(glfwGetTime())), 0, glm::sin(glm::radians(glfwGetTime())));
@@ -161,9 +165,8 @@ int main()
         ourShader.setVec3("light.ambient", ambientColor);
         ourShader.setVec3("light.diffuse", diffuseColor);
         ourShader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-        ourShader.setVec3("matt2.diffuse",1.0f,1.0f,1.0f);
+        ourShader.setVec3("matt2.diffuse", 1.0f, 1.0f, 1.0f);
         ourShader.setFloat("mat.shine", 0.5f);
-
 
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);

@@ -1,3 +1,2 @@
 C:\Users\ASUS\Documents\GitHub\computer_graphics\x64\Debug\ComputerGraphics.exe
 C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\ComputerGraphics.exe
-C:\Users\ASUS\Documents\github2\computer_graphics\x64\Debug\ComputerGraphics.exe
