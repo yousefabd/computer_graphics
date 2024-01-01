@@ -141,13 +141,14 @@ int main()
 
         glm::vec3 lightColor = glm::vec3(1.0f);
         glm::vec3 lightposition = wall_position;
-        //lightposition = glm::vec3(lightposition.x * glm::cos(glm::radians(glfwGetTime())), lightposition.y, lightposition .z * glm::sin(glm::radians(glfwGetTime())));
+        lightposition = glm::vec3(lightposition.x * glm::cos(glm::radians(glfwGetTime())), lightposition.y, lightposition .z * glm::sin(glm::radians(glfwGetTime())));
         ourShader.setVec3("lightpos", lightposition);
-        glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f, 0.5f, 0.31f);
+        glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
         ourShader.setVec3("light.ambient", ambientColor);
         ourShader.setVec3("light.diffuse", diffuseColor);
         ourShader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+        ourShader.setVec3("matt2.diffuse",1.0f,1.0f,1.0f);
         ourShader.setFloat("mat.shine", 0.5f);
 
 
