@@ -17,6 +17,7 @@ public:
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawcube(Shader,glm::vec3);
+    void draw_sky_box(Shader);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -335,5 +336,10 @@ void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 };
+void Renderer::draw_sky_box(Shader shader) {
+    std::vector<float> vertices = shape.sky_box_cube;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+}
 
 #endif

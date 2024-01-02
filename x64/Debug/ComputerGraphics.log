@@ -2,73 +2,76 @@
 C:\Users\ASUS\Documents\github2\computer_graphics\Shape.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(33,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(34,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(50,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(51,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(56,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(57,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(69,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(70,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(78,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(79,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(81,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(82,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(90,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(91,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(96,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(97,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(117,60): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(118,60): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(124,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(125,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(131,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(132,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(137,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(138,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(144,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(145,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(150,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(151,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(162,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(163,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(241,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(242,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(247,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(248,56): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(264,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(265,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(335,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(336,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'ComputerGraphics.cpp')
   
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(160,53): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(160,53): warning C4244:         with
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(160,53): warning C4244:         [
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(160,53): warning C4244:             T=float
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(160,53): warning C4244:         ]
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(161,53): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(161,53): warning C4244:         with
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(161,53): warning C4244:         [
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(161,53): warning C4244:             T=float
-C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(161,53): warning C4244:         ]
+C:\Users\ASUS\Documents\github2\computer_graphics\Renderer.h(342,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  (compiling source file 'ComputerGraphics.cpp')
+  
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(196,53): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(196,53): warning C4244:         with
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(196,53): warning C4244:         [
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(196,53): warning C4244:             T=float
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(196,53): warning C4244:         ]
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(197,53): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(197,53): warning C4244:         with
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(197,53): warning C4244:         [
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(197,53): warning C4244:             T=float
+C:\Users\ASUS\Documents\github2\computer_graphics\ComputerGraphics.cpp(197,53): warning C4244:         ]
 glfw3.lib(init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(init.obj)' or at ''; linking object as if no debug info
 glfw3.lib(window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(window.obj)' or at ''; linking object as if no debug info
 glfw3.lib(input.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(input.obj)' or at ''; linking object as if no debug info
