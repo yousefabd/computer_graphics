@@ -102,7 +102,15 @@ int main()
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
-        "images/box/cliffrt.png",
+        /*"images/right.jpg",
+        "images/left.jpg",
+        "images/top.jpg",
+        "images/bottom.jpg",
+        "images/front.jpg",
+        "images/back.jpg"
+        */
+
+       "images/box/cliffrt.png",
         "images/box/clifflf.png",
         "images/box/cliffup.png",
         "images/box/cliffdn.png",
@@ -179,7 +187,7 @@ int main()
         // ------
         renderer.clear();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
-       glDepthMask(GL_FALSE); 
+      /** glDepthMask(GL_FALSE);
        renderer.bind(CVAO, CVBO, Cube_box_shader);
         Cube_box_shader.use();
         texture.activate(cube_Sky, GL_TEXTURE0);
@@ -187,7 +195,7 @@ int main()
         Cube_box_shader.setMat4("view", cube_view);
         Cube_box_shader.setMat4("projection", projection);
         renderer.draw_sky_box(Cube_box_shader);
-        glDepthMask(GL_TRUE);
+        glDepthMask(GL_TRUE);*/
         glBindVertexArray(VAO);
         ourShader.use();
         //lighting
@@ -215,11 +223,11 @@ int main()
         renderer.drawRockDome(ourShader, texture,glm::vec3(-3.0f), glm::vec3(0.2f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
-        renderer.drawGate(ourShader,wall_position);
+       // renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
-        //renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
-        //renderer.drawMinaret(ourShader,texture,glm::vec3(0.0f), glm::vec3(6.0f),minaretTextures);
-       renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
+        renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
+       renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
+       renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(6.0f), mosqueTextures);
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);
