@@ -102,12 +102,12 @@ int main()
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
-        "images/right.jpg",
-        "images/left.jpg",
-        "images/top.jpg",
-        "images/bottom.jpg",
-        "images/front.jpg",
-        "images/back.jpg"
+        "images/box/cliffrt.png",
+        "images/box/clifflf.png",
+        "images/box/cliffup.png",
+        "images/box/cliffdn.png",
+        "images/box/cliffft.png",
+        "images/box/cliffbk.png"
     };
     unsigned int cube_Sky = cube_textures.make_sky_box(faces);
     std::vector <float> cubebox_vertices = cube_box.sky_box_cube;
