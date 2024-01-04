@@ -163,6 +163,32 @@ private:
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
         }
     }
+    void drawPillar(Shader shader, glm::mat4 model) {
+        std::vector<TexVertex> vertices = shape.texCube1;
+        glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+        
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        model = glm::translate(model, glm::vec3(0.0f, .7f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.7f, 0.3f, 0.7f));
+        shader.setMat4("model", model);
+        glm::mat4 temp = model;
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        model = glm::translate(model, glm::vec3(0.0f, 61.0f, 0.0f));
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        model = glm::translate(model, glm::vec3(0.0f, 1.5f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        model = temp;
+        model = glm::scale(model, glm::vec3(0.17f, 10.0f, 0.17f));
+        model = glm::translate(model,glm::vec3(0.0f,.55f,-2.5f));
+        for (int i = 0; i < 6; i++) {
+            drawCylinder(shader, model);
+            model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+        }
+    }
 };
 void Renderer::clear() const{
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -176,8 +202,6 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     unsigned int mosque_wall = textures[0];
     unsigned int mosque_roof = textures[1];
     unsigned int mosque_cylinder = textures[2];
-    //sphere
-    shader.setBool("useTexture", false);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
     model = glm::translate(model,position);
@@ -209,6 +233,17 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     model = glm::scale(model,glm::vec3(1.0f, 0.1f, 1.0f));
     texture.activate(textures[4], GL_TEXTURE0);
     drawTriangles(shader, model);
+    model = glm::rotate(model, glm::radians(-2.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::scale(model, glm::vec3(.08f, 0.6f, .08f));
+    model = glm::translate(model, glm::vec3(0.3f,1.0f,9.0f));
+    glm::mat4 temp = model;
+    texture.activate(textures[6],GL_TEXTURE0);
+    for (int i = 0; i < 8; i++) {
+        drawPillar(shader, model);
+        model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(-4.3f, 0.0f, -1.5f));
+    }
+    model = temp;
     //octgone
     texture.activate(mosque_wall, GL_TEXTURE0);
     model = glm::mat4(1.0f);

@@ -100,7 +100,8 @@ int main()
     unsigned int smooth_stone = texture.genTexture("images/smooth-stone.jpg");
     unsigned int mosque_cylinder2 = texture.genTexture("images/mosque-cylinder2.jpg");
     unsigned int rockdome_roof = texture.genTexture("images/rockdome-roof.jpg");
-    unsigned int rockdome_wall = texture.genTexture("images/test.jpg");
+    unsigned int rockdome_wall = texture.genTexture("images/rockdome-wall.jpg");
+    unsigned int smooth_quartz=texture.genTexture("images/test.jpg");
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
@@ -168,7 +169,7 @@ int main()
 
     light_shader.use();
     // vectors of stored textures
-    std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall};
+    std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall,smooth_quartz};
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2};
     // render loop
