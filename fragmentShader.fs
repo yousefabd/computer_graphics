@@ -37,7 +37,7 @@ void main()
     //making vectors
     vec3 norm=normalize(normal);
 		vec3 lightdir=normalize(FragPos-light.position);
-         float ambient_power=0.5f;
+         float ambient_power=1.0f;
          float diff=max(dot(norm,lightdir),0.0f);
 	if(useTexture){
         //-----------------------------------------

@@ -12,7 +12,7 @@ public:
 	void clear() const;
 	void bind(unsigned int VAO, unsigned int VBO, Shader shader);
     void drawRockDome(Shader, Texture,glm::vec3,glm::vec3,std::vector<unsigned int>);
-    void drawGate(Shader,glm::vec3 );
+    void drawGate(Shader,Texture,glm::vec3,glm::vec3,std::vector<unsigned int>);
     void drawWall(Shader, glm::vec3 ,glm::vec3 );
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
@@ -220,12 +220,19 @@ void::Renderer::drawWall(Shader shader, glm::vec3 position,glm::vec3 scale) {
         model = glm::translate(model, glm::vec3(-4.4f, 0.0f, 0.0f));
     }
 }
-void Renderer::drawGate(Shader shader, glm::vec3 position) {
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
-    model = glm::scale(model, glm::vec3(10.0f, 10.0f, 1.0f));
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 3.0f));
-    drawArch(shader, model);
+void Renderer::drawGate(Shader shader,Texture texture, glm::vec3 position,glm::vec3 scale,std::vector<unsigned int> textures) {
+    for (int i = 0; i < 4; i++) {
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, position);
+        glm::mat4 temp = model;
+        model = glm::scale(model, scale);
+        drawArch(shader, model);
+        model = glm::rotate(temp, glm::radians(90.0f), glm::vec3(-0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, scale);
+        model = glm::translate(model, glm::vec3(-0.5, 0.0f, 5.0f));
+        drawArch(shader, model);
+        position.x += 10.0f;
+    }
 }
 void Renderer::drawMinaret(Shader shader,Texture texture, glm::vec3 position, glm::vec3 scale,std::vector<unsigned int>textures) {
     std::vector<TexVertex> vertices = shape.texCube1;
@@ -322,9 +329,6 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     shader.setBool("useTexture", false);
     drawSphere(shader, model,glm::vec3(0.55f,0.55f,0.55f));
 }
-    
-
-
 void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     std::vector<TexVertex> vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);

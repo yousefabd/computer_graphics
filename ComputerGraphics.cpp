@@ -156,9 +156,7 @@ int main()
         ourShader.use();
         //lighting
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 lightposition = glm::vec3(2.0f);
-        lightposition.y = cos(glfwGetTime() / 2.0f) * 25.0f;
-        lightposition.z = sin(glfwGetTime() / 2.0f) * 25.0f;
+        glm::vec3 lightposition = glm::vec3(42.0f,55.0f,-15.0f);
         //std::cout << glfwGetTime() << std::endl;
         ourShader.setVec3("light.position", lightposition);
         glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
@@ -176,13 +174,13 @@ int main()
         ourShader.setMat4("projection", projection);
 
         // render boxes
-        //renderer.drawRockDome(ourShader, texture, glm::vec3(1.0f), glm::vec3(0.2f), rockdomeTextures);
+        renderer.drawRockDome(ourShader, texture, glm::vec3(15.0f,0.0f,15.0f), glm::vec3(1.0f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
-        renderer.drawGate(ourShader,wall_position);
+        renderer.drawGate(ourShader,texture,wall_position, glm::vec3(10.0f, 10.0f, 1.0f),minaretTextures);
         texture.activate(wall, GL_TEXTURE0);
         //renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
-        //renderer.drawMinaret(ourShader,texture,glm::vec3(0.0f), glm::vec3(6.0f),minaretTextures);
+        renderer.drawMinaret(ourShader,texture,glm::vec3(-15.0f,0.0f,-15.0f), glm::vec3(5.0f),minaretTextures);
        renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
