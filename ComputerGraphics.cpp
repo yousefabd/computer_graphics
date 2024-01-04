@@ -79,6 +79,8 @@ int main()
     Shader ourShader("vertexShader.vs", "fragmentShader.fs");
     Shader light_shader("light_cube.vs", "light_cube.fs");
     Shape shape;
+    Shape cube_box;
+    Texture cube_textures;
     Renderer renderer;
     Texture texture; 
     unsigned int wall = texture.genTexture("images/wall.jpg");
@@ -97,6 +99,37 @@ int main()
     unsigned int sandstone = texture.genTexture("images/sandstone.jpg");
     unsigned int smooth_stone = texture.genTexture("images/smooth-stone.jpg");
     unsigned int mosque_cylinder2 = texture.genTexture("images/test.jpg");
+    //------------------------------------------------------------------------
+    //cubebox stuff
+    std::vector<std::string>faces{
+        /*"images/right.jpg",
+        "images/left.jpg",
+        "images/top.jpg",
+        "images/bottom.jpg",
+        "images/front.jpg",
+        "images/back.jpg"
+        */
+
+       "images/box/cliffrt.png",
+        "images/box/clifflf.png",
+        "images/box/cliffup.png",
+        "images/box/cliffdn.png",
+        "images/box/cliffft.png",
+        "images/box/cliffbk.png"
+    };
+    unsigned int cube_Sky = cube_textures.make_sky_box(faces);
+    std::vector <float> cubebox_vertices = cube_box.sky_box_cube;
+    unsigned int CVAO, CVBO;
+    glGenVertexArrays(1, &CVAO);
+    glBindVertexArray(CVAO);
+    glGenBuffers(1, &CVBO);
+    glBindBuffer(GL_ARRAY_BUFFER,CVBO);
+    glBufferData(GL_ARRAY_BUFFER, 3, cubebox_vertices.data(), GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    Shader Cube_box_shader("sky_box.vs", "sky_box.fs");
+    Cube_box_shader.use();
+    Cube_box_shader.setInt("sky", 0);
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     std::vector<TexVertex> vertices = shape.texRegtangle;
@@ -130,6 +163,7 @@ int main()
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(TexVertex), (void*)0);
     glEnableVertexAttribArray(0);
+
     light_shader.use();
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
@@ -152,6 +186,16 @@ int main()
         // clear buffer and depth
         // ------
         renderer.clear();
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
+      /** glDepthMask(GL_FALSE);
+       renderer.bind(CVAO, CVBO, Cube_box_shader);
+        Cube_box_shader.use();
+        texture.activate(cube_Sky, GL_TEXTURE0);
+        glm::mat4 cube_view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+        Cube_box_shader.setMat4("view", cube_view);
+        Cube_box_shader.setMat4("projection", projection);
+        renderer.draw_sky_box(Cube_box_shader);
+        glDepthMask(GL_TRUE);*/
         glBindVertexArray(VAO);
         ourShader.use();
         //lighting
@@ -167,21 +211,22 @@ int main()
         ourShader.setVec3("matt2.diffuse", 1.0f, 1.0f, 1.0f);
         ourShader.setFloat("mat.shine", 0.5f);
 
-        // pass projection matrix to shader (note that in this case it could change every frame)
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
+        // pass projection matrix to shader (note that in this case it could change every frame
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
 
         // render boxes
-        renderer.drawRockDome(ourShader, texture, glm::vec3(15.0f,0.0f,15.0f), glm::vec3(1.0f), rockdomeTextures);
+        renderer.bind(VAO, VBO, ourShader);
+        renderer.drawRockDome(ourShader, texture,glm::vec3(-3.0f), glm::vec3(0.2f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
-        renderer.drawGate(ourShader,texture,wall_position, glm::vec3(10.0f, 10.0f, 1.0f),minaretTextures);
+       // renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
-        //renderer.drawWall(ourShader, mosque_position,glm::vec3(20.0f));
-        renderer.drawMinaret(ourShader,texture,glm::vec3(-15.0f,0.0f,-15.0f), glm::vec3(5.0f),minaretTextures);
-       renderer.drawMosque(ourShader, texture, glm::vec3(3.0f), glm::vec3(3.0f), mosqueTextures);
+        renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
+       renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
+       renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(6.0f), mosqueTextures);
+
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);

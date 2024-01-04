@@ -17,6 +17,7 @@ public:
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawcube(Shader,glm::vec3);
+    void draw_sky_box(Shader);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -280,6 +281,7 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
+    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     texture.activate(textures[0], GL_TEXTURE0);
 
     drawWallSide2(shader, model,0.0f,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f),6,1);
@@ -339,5 +341,10 @@ void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 };
+void Renderer::draw_sky_box(Shader shader) {
+    std::vector<float> vertices = shape.sky_box_cube;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+}
 
 #endif
