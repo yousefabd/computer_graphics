@@ -90,7 +90,7 @@ int main()
     unsigned int mosque_cylinder = texture.genTexture("images/cylinder.jpg");
     unsigned int stone_brick = texture.genTexture("images/stone-brick.jpg");
     unsigned int quartz = texture.genTexture("images/quartz.jpg");
-    unsigned int sandstone_brick = texture.genTexture("images/test.jpg");
+    unsigned int sandstone_brick = texture.genTexture("images/sandstone-brick.jpg");
     unsigned int windowed_wall = texture.genTexture("images/wall-windowed.jpeg");
     unsigned int entrance_wall = texture.genTexture("images/entrance-wall.jpg");
     unsigned int entrance_wall2= texture.genTexture("images/arch-wall.jpg");
@@ -98,7 +98,9 @@ int main()
     unsigned int arch_frame = texture.genTexture("images/arch-frame.jpg");
     unsigned int sandstone = texture.genTexture("images/sandstone.jpg");
     unsigned int smooth_stone = texture.genTexture("images/smooth-stone.jpg");
-    unsigned int mosque_cylinder2 = texture.genTexture("images/test.jpg");
+    unsigned int mosque_cylinder2 = texture.genTexture("images/mosque-cylinder2.jpg");
+    unsigned int rockdome_roof = texture.genTexture("images/rockdome-roof.jpg");
+    unsigned int rockdome_wall = texture.genTexture("images/test.jpg");
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
@@ -166,7 +168,7 @@ int main()
 
     light_shader.use();
     // vectors of stored textures
-    std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder };
+    std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall};
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2};
     // render loop
@@ -218,7 +220,7 @@ int main()
 
         // render boxes
         renderer.bind(VAO, VBO, ourShader);
-        renderer.drawRockDome(ourShader, texture,glm::vec3(-3.0f), glm::vec3(0.2f), rockdomeTextures);
+        renderer.drawRockDome(ourShader, texture,glm::vec3(-3.0f), glm::vec3(25.0f), rockdomeTextures);
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
        // renderer.drawGate(ourShader,wall_position);

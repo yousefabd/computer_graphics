@@ -200,12 +200,25 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     model = glm::translate(model, position);
     model = glm::scale(model, glm::vec3(7.0f, 4.0f, 7.0f));
     drawTriangles(shader, model);
+    //inside roof
+    model = glm::scale(model, glm::vec3(0.98f, 0.98f, 0.98f));
+    texture.activate(textures[3], GL_TEXTURE0);
+    drawTriangles(shader, model);
+    //floor
+    model = glm::translate(model, glm::vec3(0.0f, -0.55f, 0.0f));
+    model = glm::scale(model,glm::vec3(1.0f, 0.1f, 1.0f));
+    texture.activate(textures[4], GL_TEXTURE0);
+    drawTriangles(shader, model);
     //octgone
     texture.activate(mosque_wall, GL_TEXTURE0);
     model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
     model = glm::translate(model, position);
     model = glm::scale(model, glm::vec3(7.0f, 4.0f, 7.0f));
+    drawOctagon(shader, model);
+    model = glm::scale(model, glm::vec3(0.98f, 1.0f, 0.98f));
+    model = glm::translate(model, glm::vec3(-0.02f, 0.0f, 0.02f));
+    texture.activate(textures[5], GL_TEXTURE0);
     drawOctagon(shader, model);
 }
 void::Renderer::drawWall(Shader shader, glm::vec3 position,glm::vec3 scale) {
