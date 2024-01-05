@@ -101,7 +101,9 @@ int main()
     unsigned int mosque_cylinder2 = texture.genTexture("images/mosque-cylinder2.jpg");
     unsigned int rockdome_roof = texture.genTexture("images/rockdome-roof.jpg");
     unsigned int rockdome_wall = texture.genTexture("images/rockdome-wall.jpg");
-    unsigned int smooth_quartz=texture.genTexture("images/test.jpg");
+    unsigned int smooth_quartz=texture.genTexture("images/smooth-quartz.jpg");
+    unsigned int mosque_wall_inside = texture.genTexture("images/mosque-wall-inside.jpg");
+    unsigned int mosque_wall_inside2 = texture.genTexture("images/test.jpg");
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
@@ -171,7 +173,7 @@ int main()
     // vectors of stored textures
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall,smooth_quartz};
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
-    std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2};
+    std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2,mosque_wall_inside,mosque_wall_inside2,quartz};
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -221,14 +223,15 @@ int main()
 
         // render boxes
         renderer.bind(VAO, VBO, ourShader);
-        renderer.drawRockDome(ourShader, texture,glm::vec3(-3.0f), glm::vec3(25.0f), rockdomeTextures);
+        //this is the realistic size of the rock dome that should be used
+        // --------------------------------------------------------------
         renderer.bind(VAO,VBO,ourShader);
         texture.activate(stone, GL_TEXTURE0);
        // renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
-        renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
+        //renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
        renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
-       renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(6.0f), mosqueTextures);
+       renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(65.0f,95.0f,65.0f), mosqueTextures);
 
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();

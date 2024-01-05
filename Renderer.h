@@ -330,16 +330,34 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
     model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    //right wall outside
     texture.activate(textures[0], GL_TEXTURE0);
-
     drawWallSide2(shader, model,0.0f,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f),6,1);
+    //right wall inside
+    texture.activate(textures[7], GL_TEXTURE0);
+    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.0f, .1f), glm::vec3(1.0f), 6, 1);
     texture.activate(textures[1], GL_TEXTURE0);
+    //front wall outside
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -2.3f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
+    //front wall inside
+    texture.activate(textures[8], GL_TEXTURE0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -2.4f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
+    //left wall outside
     texture.activate(textures[2], GL_TEXTURE0);
     drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.9f), glm::vec3(1.0f, 1.3f, 1.0f), 6, 1);
+    //left wall inside
+    texture.activate(textures[7], GL_TEXTURE0);
+    drawWallSide2(shader, model, 0.0f, glm::vec3(0.0f, 0.2f, 8.8f), glm::vec3(1.0f, 1.3f, 1.0f), 6, 1);
+    //back wall inside
+    texture.activate(textures[8], GL_TEXTURE0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.65f, 0.0f, -9.1f), glm::vec3(1.05f, 1.0f, 1.0f), 6, 1);
+    //roof
     texture.activate(textures[3], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 4.5f, -0.71f), glm::vec3(1.05f, 7.4f, 4.0f), 6, 0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 5.17f, -1.0f), glm::vec3(1.05f, 1.75f, 5.0f), 6, 0);
+    //floor
+    texture.activate(textures[9], GL_TEXTURE0);
+    drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 4.5f, 0.8f), glm::vec3(1.05f, 7.4f, 4.0f), 6, 0);
     texture.activate(textures[4], GL_TEXTURE0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 2.1f, -0.94), glm::vec3(1.05f, 3.37f, 0.5f), 6, 0);
     drawWallSide2(shader, model, 90.0f, glm::vec3(0.0f, 5.14f, -1.3f), glm::vec3(1.05f, 1.69f, 0.5f), 6, 0);
@@ -378,6 +396,33 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     model = glm::scale(model,glm::vec3(0.47f));
     shader.setBool("useTexture", false);
     drawSphere(shader, model,glm::vec3(0.55f,0.55f,0.55f));
+    //inside decoration
+    shader.setBool("useTexture", true);
+    texture.activate(textures[3], GL_TEXTURE0);
+    glm::mat4 source = model;
+    float pos = 9.25f;
+    for(int i = 0; i < 2; i++) {
+        model = source;
+        model = glm::translate(model, glm::vec3(11.2f, -7.1f, pos));
+        model = glm::scale(model, glm::vec3(5.7f, 2.0f, 1.6f));
+        drawArch(shader, model);
+        for (int i = 0; i < 4; i++) {
+            model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+            drawArch(shader, model);
+        }
+        model = glm::translate(model, glm::vec3(-0.46f, -2.0f, -0.28f));
+        model = glm::scale(model, glm::vec3(0.2f, 0.076f, 0.8f));
+        drawPillar(shader, model);
+        float untrust = 0.0f;
+        float inc = 0.2f;
+        for (int i = 0; i < 4; i++) {
+            model = glm::translate(model, glm::vec3(4.8f + untrust, 0.0f, 0.0f));
+            drawPillar(shader, model);
+            untrust += inc;
+            inc /= 6.0f;
+        }
+        pos -= 14.0f;
+    }
 }
 void Renderer::drawcube(Shader shader, glm::vec3 pos) {
     std::vector<TexVertex> vertices = shape.texCube1;
