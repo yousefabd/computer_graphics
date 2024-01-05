@@ -6,6 +6,7 @@
 #include "Shape.h"
 #include "Vertex.h"
 #include "Texture.h"
+#include<models/Model.h>
 
 class Renderer {
 public:
@@ -18,6 +19,8 @@ public:
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawcube(Shader,glm::vec3);
     void draw_sky_box(Shader);
+    void drawfloor(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
+    void drawModel(Shader, glm::vec3, glm::vec3, Model,glm::mat4,glm::mat4);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -188,6 +191,13 @@ private:
             drawCylinder(shader, model);
             model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
         }
+    }
+    void drawRectangle(Shader shader, glm::mat4 model) {
+        std::vector<TexVertex> vertices = shape.texRegtangle;
+        glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+
+        shader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     }
 };
 void Renderer::clear() const{
@@ -438,6 +448,44 @@ void Renderer::draw_sky_box(Shader shader) {
     std::vector<float> vertices = shape.sky_box_cube;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+}
+void Renderer::drawfloor(Shader shader, Texture texture, glm::vec3 position, glm::vec3 scale, std::vector<unsigned int>textures) {
+    std::vector<TexVertex> vertices = shape.texRegtangle;
+    unsigned int sandstone = textures[0];
+    unsigned int quartz = textures[1];
+    unsigned int wall = textures[2];
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, position);
+    model = glm::scale(model, scale);
+    model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    shader.setMat4("model", model);
+    shader.setBool("useTexture", true);
+    for (unsigned int i = 0; i < 32; i++) {
+        for (unsigned int j = 0; j < 32; j++) {
+
+            if (j >= 3 && j <= 10) {
+                texture.activate(quartz, GL_TEXTURE0);
+            }
+            else {
+                texture.activate(sandstone, GL_TEXTURE0);
+            }
+
+            model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+            drawRectangle(shader, model);
+        }
+        model = glm::translate(model, glm::vec3(-32.0f, -1.0f, 0.0f));
+    }
+}
+void Renderer::drawModel(Shader shader, glm::vec3 pos, glm::vec3 scale, Model theModel,glm::mat4 view,glm::mat4 projection) {
+   
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, pos);
+    model = glm::scale(model, scale);
+    shader.setMat4("model", model);
+    shader.setMat4("view", view);
+    shader.setMat4("projection", projection);
+    theModel.Draw(shader);
 }
 
 #endif

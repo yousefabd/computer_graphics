@@ -158,6 +158,8 @@
     <None Include="fragmentShader.fs" />
     <None Include="light_cube.fs" />
     <None Include="light_cube.vs" />
+    <None Include="model_fragment.fs" />
+    <None Include="model_vertex.vs" />
     <None Include="sky_box.fs" />
     <None Include="sky_box.vs" />
     <None Include="vertexShader.vs" />

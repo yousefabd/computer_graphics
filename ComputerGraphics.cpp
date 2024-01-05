@@ -10,6 +10,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include <bits/stdc++.h>
+#include<models/Model.h>
 //textures
 unsigned int wall;
 unsigned int stone;
@@ -174,6 +175,11 @@ int main()
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall,smooth_quartz};
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2,mosque_wall_inside,mosque_wall_inside2,quartz};
+    std::vector<unsigned int>floortextures = { sandstone_brick,quartz,wall };
+    Shader Mshader("model_vertex.vs", "model_fragment.fs");
+    Model gordon("backpack/backpack.obj");
+
+    
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -218,6 +224,9 @@ int main()
 
         // pass projection matrix to shader (note that in this case it could change every frame
         glm::mat4 view = camera.GetViewMatrix();
+        glm::mat4 model = glm::mat4(1.0f);
+       // model = glm::translate(model, lightposition);
+        ourShader.setMat4("model", model);
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
 
@@ -229,10 +238,17 @@ int main()
         texture.activate(stone, GL_TEXTURE0);
        // renderer.drawGate(ourShader,wall_position);
         texture.activate(wall, GL_TEXTURE0);
-        //renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
+        renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
        renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
        renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(65.0f,95.0f,65.0f), mosqueTextures);
-
+       renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,0.0f,0.0f),glm::vec3(2.0f), floortextures);
+        renderer.bind(VAO, VBO, Mshader);
+        Mshader.use();
+        Mshader.setMat4("model", model);
+        Mshader.setMat4("view", view);
+        Mshader.setMat4("projection", projection);
+        gordon.Draw(Mshader);
+       // renderer.drawModel(Mshader, glm::vec3(0.0f), glm::vec3(0.0f), gordon,view,projection);
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);
