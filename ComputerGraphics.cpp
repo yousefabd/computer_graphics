@@ -10,7 +10,6 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include <bits/stdc++.h>
-#include<models/Model.h>
 //textures
 unsigned int wall;
 unsigned int stone;
@@ -23,11 +22,10 @@ glm::vec3 mosque_position = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 wall_position = glm::vec3(-20.0f, 0.0f, -10.0f);
 
 // camera
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 //Camera camera(glm::vec3(0.0f, 12.0f, 30.0f));
-Camera camera(glm::vec3(0.0f,0.0f,0.0f));
+Camera camera(glm::vec3(1500.0f,0.0f,-1500.0f));
 bool firstMouse = true;
 
 float lastX = 800.0f / 2.0;
@@ -105,6 +103,8 @@ int main()
     unsigned int smooth_quartz=texture.genTexture("images/smooth-quartz.jpg");
     unsigned int mosque_wall_inside = texture.genTexture("images/mosque-wall-inside.jpg");
     unsigned int mosque_wall_inside2 = texture.genTexture("images/test.jpg");
+    unsigned int grass= texture.genTexture("images/grass.jpg");
+    unsigned int garden_border= texture.genTexture("images/garden-border.jpg");
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
@@ -175,9 +175,7 @@ int main()
     std::vector<unsigned int> rockdomeTextures = { mosque_wall,mosque_roof,mosque_cylinder,rockdome_roof,quartz,rockdome_wall,smooth_quartz};
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2,mosque_wall_inside,mosque_wall_inside2,quartz};
-    std::vector<unsigned int>floortextures = { sandstone_brick,quartz,wall };
-    Shader Mshader("model_vertex.vs", "model_fragment.fs");
-    Model gordon("backpack/backpack.obj");
+    std::vector<unsigned int>floortextures = { sandstone,quartz,grass,garden_border,smooth_stone};
 
     
     // render loop
@@ -197,7 +195,7 @@ int main()
         // clear buffer and depth
         // ------
         renderer.clear();
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 5600.0f);
       /** glDepthMask(GL_FALSE);
        renderer.bind(CVAO, CVBO, Cube_box_shader);
         Cube_box_shader.use();
@@ -234,26 +232,26 @@ int main()
         renderer.bind(VAO, VBO, ourShader);
         //this is the realistic size of the rock dome that should be used
         // --------------------------------------------------------------
-        renderer.bind(VAO,VBO,ourShader);
-        texture.activate(stone, GL_TEXTURE0);
+        renderer.drawRockDome(ourShader, texture, glm::vec3(39.5f, 1.3f, -45.5f),glm::vec3(155.0f), rockdomeTextures);
+        //renderer.bind(VAO,VBO,ourShader);
+        //texture.activate(stone, GL_TEXTURE0);
        // renderer.drawGate(ourShader,wall_position);
-        texture.activate(wall, GL_TEXTURE0);
-        renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
-       renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
-       renderer.drawMosque(ourShader, texture, glm::vec3(-70.0f,-6.0f,68.3f), glm::vec3(65.0f,95.0f,65.0f), mosqueTextures);
-       renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,0.0f,0.0f),glm::vec3(2.0f), floortextures);
-        renderer.bind(VAO, VBO, Mshader);
-        Mshader.use();
-        Mshader.setMat4("model", model);
-        Mshader.setMat4("view", view);
-        Mshader.setMat4("projection", projection);
-        gordon.Draw(Mshader);
+        //texture.activate(wall, GL_TEXTURE0);
+        //renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
+       //renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
+       renderer.drawMosque(ourShader, texture, glm::vec3(33.5f, 0.3f, -45.5f), glm::vec3(215.0f,285.0f,215.0f), mosqueTextures);
+       renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,-120.0f,0.0f),glm::vec3(370.0f,1.0f,370.0f), floortextures);
+        //Mshader.use();
+        //Mshader.setMat4("model", model);
+        //Mshader.setMat4("view", view);
+        //Mshader.setMat4("projection", projection);
+        //gordon.Draw(Mshader);
        // renderer.drawModel(Mshader, glm::vec3(0.0f), glm::vec3(0.0f), gordon,view,projection);
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);
         light_shader.setMat4("projection", projection); 
-        renderer.drawcube(light_shader, lightposition);
+        //renderer.drawcube(light_shader, lightposition);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

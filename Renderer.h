@@ -6,7 +6,6 @@
 #include "Shape.h"
 #include "Vertex.h"
 #include "Texture.h"
-#include<models/Model.h>
 
 class Renderer {
 public:
@@ -20,7 +19,6 @@ public:
     void drawcube(Shader,glm::vec3);
     void draw_sky_box(Shader);
     void drawfloor(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
-    void drawModel(Shader, glm::vec3, glm::vec3, Model,glm::mat4,glm::mat4);
 private:
     Shape shape;
     void drawCubes(Shader shader,glm::mat4 model) {
@@ -217,6 +215,7 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     model = glm::translate(model,position);
     model = glm::translate(model, glm::vec3(0.0, 6.0f, 3.69f));
     model = glm::scale(model, glm::vec3(0.95, 1.425, 0.95f));
+    shader.setBool("useTexture", false);
     drawSphere(shader, model, glm::vec3(1.0f, .647f, 0.0f));
     shader.setBool("useTexture", true);
     //cylinder
@@ -337,8 +336,8 @@ void Renderer::drawMosque(Shader shader, Texture texture, glm::vec3 position, gl
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     shader.setBool("useTexture", true);
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
     model = glm::scale(model, scale);
+    model = glm::translate(model, position);
     model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     //right wall outside
     texture.activate(textures[0], GL_TEXTURE0);
@@ -453,7 +452,9 @@ void Renderer::drawfloor(Shader shader, Texture texture, glm::vec3 position, glm
     std::vector<TexVertex> vertices = shape.texRegtangle;
     unsigned int sandstone = textures[0];
     unsigned int quartz = textures[1];
-    unsigned int wall = textures[2];
+    unsigned int grass = textures[2];
+    unsigned int garden_border = textures[3];
+    unsigned int smooth_stone = textures[4];
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
@@ -464,8 +465,14 @@ void Renderer::drawfloor(Shader shader, Texture texture, glm::vec3 position, glm
     for (unsigned int i = 0; i < 32; i++) {
         for (unsigned int j = 0; j < 32; j++) {
 
-            if (j >= 3 && j <= 10) {
-                texture.activate(quartz, GL_TEXTURE0);
+            if (((i==5 or i==12 or i ==19 or i==26 ) and (j>=5 and j<= 12 or j>= 19 and j<=26)) or((j == 5 or j == 12 or j == 19 or j == 26) and (i >= 5 and i <= 12 or i >= 19 and i <= 26))) {
+                texture.activate(garden_border, GL_TEXTURE0);
+            }
+            else if ((i >= 6 and i <= 11 or i >= 20 and i <= 25) and (j >= 6 and j <= 11 or j >= 20 and j <= 25)) {
+                texture.activate(grass, GL_TEXTURE0);
+            }
+            else if (i == 15 or i == 16 or j == 15 or j == 16) {
+                texture.activate(smooth_stone, GL_TEXTURE0);
             }
             else {
                 texture.activate(sandstone, GL_TEXTURE0);
@@ -476,16 +483,6 @@ void Renderer::drawfloor(Shader shader, Texture texture, glm::vec3 position, glm
         }
         model = glm::translate(model, glm::vec3(-32.0f, -1.0f, 0.0f));
     }
-}
-void Renderer::drawModel(Shader shader, glm::vec3 pos, glm::vec3 scale, Model theModel,glm::mat4 view,glm::mat4 projection) {
-   
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, pos);
-    model = glm::scale(model, scale);
-    shader.setMat4("model", model);
-    shader.setMat4("view", view);
-    shader.setMat4("projection", projection);
-    theModel.Draw(shader);
 }
 
 #endif
