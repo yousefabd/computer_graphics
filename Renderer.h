@@ -20,7 +20,7 @@ public:
     void drawcube(Shader,glm::vec3);
     void draw_sky_box(Shader);
     void drawfloor(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
-    void drawAllTrees(Shader, glm::vec3, glm::vec3, std::vector<Model>);
+    void drawAllTrees(Shader, glm::vec3, glm::vec3, Model);
     
 private:
     Shape shape;
@@ -492,20 +492,20 @@ void Renderer::drawfloor(Shader shader, Texture texture, glm::vec3 position, glm
         model = glm::translate(model, glm::vec3(-32.0f, -1.0f, 0.0f));
     }
 }
-void Renderer::drawAllTrees(Shader shader, glm::vec3 pos, glm::vec3 scale, std::vector<Model>Trees) {
+void Renderer::drawAllTrees(Shader shader, glm::vec3 pos, glm::vec3 scale, Model Trees) {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
     model = glm::translate(model, pos);
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < Trees.size(); j++) {
-            drawTree(shader, model, Trees[j]);
+    
+    for (int i = 1; i <= 2; i++) {
+        for (int j = 1; j <= 2; j++) {
+            drawTree(shader, model, Trees);
             model = glm::translate(model, glm::vec3(4.0f, 0.0f, 0.0f));
         }
-        drawTree(shader, model, Trees[0]);
-        model = glm::translate(model, glm::vec3(-8.0f, 0.0f, 2.0f));
-        
-
+        model = glm::translate(model, glm::vec3(-8.0f, 0.0f, 1.0f));
     }
+
+    
 
 }
 

@@ -9,7 +9,7 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 
 #include <Shader.h>
-
+#include<bits/stdc++.h>
 #include <string>
 #include <vector>
 using namespace std;
@@ -45,7 +45,9 @@ public:
     vector<Vertex>       vertices;
     vector<unsigned int> indices;
     vector<Texture1>      textures;
-    unsigned int VAO;
+    unsigned int      VAO;
+    map<string,unsigned int> locs;
+
 
     // constructor
     Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture1> textures)
@@ -75,14 +77,39 @@ public:
             if (name == "texture_diffuse")
                 number = std::to_string(diffuseNr++);
             else if (name == "texture_specular")
-                number = std::to_string(specularNr++); // transfer unsigned int to string
-            else if (name == "texture_normal")
-                number = std::to_string(normalNr++); // transfer unsigned int to string
-            else if (name == "texture_height")
-                number = std::to_string(heightNr++); // transfer unsigned int to string
+            {
+                continue;
+            }
 
-            // now set the sampler to the correct texture unit
-            glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()), i);
+            //number = std::to_string(specularNr++); // transfer unsigned int to string
+            else if (name == "texture_normal")
+            {
+                continue;
+            }
+            //number = std::to_string(normalNr++); // transfer unsigned int to string
+            else if (name == "texture_height")
+            {
+                continue;
+            }
+            // number = std::to_string(heightNr++); // transfer unsigned int to string
+
+         // now set the sampler to the correct texture unit
+            unsigned int location = -1;
+            if (locs.find((name + number).c_str())== locs.end()) {
+                location = locs[(name + number).c_str()];
+            }
+            if (location) {
+              
+                glUniform1i(location, i);
+            }
+            else {
+                location = glGetUniformLocation(shader.ID, (name + number).c_str());
+                glUniform1i(location, i);
+                locs.insert({ (name + number).c_str(), location });
+            }
+
+
+
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
