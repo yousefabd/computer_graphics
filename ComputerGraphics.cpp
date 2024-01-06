@@ -9,7 +9,7 @@
 #include "Shape.h"
 #include "Vertex.h"
 #include "Renderer.h"
-#include <models/Model.h>
+#include "Model.h"
 #include "Texture.h"
 #include<stb_image.h>
 #include <bits/stdc++.h>
