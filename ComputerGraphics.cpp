@@ -8,7 +8,6 @@
 #include "Shape.h"
 #include "Vertex.h"
 #include "Renderer.h"
-#include <models/Model.h>
 #include "Texture.h"
 #include <bits/stdc++.h>
 //textures
@@ -177,9 +176,9 @@ int main()
     std::vector<unsigned int> minaretTextures = { sandstone_brick,stone_brick};
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2,mosque_wall_inside,mosque_wall_inside2,quartz};
     std::vector<unsigned int>floortextures = { sandstone,quartz,grass,garden_border,smooth_stone};
-    Model tree("Tree/Tree.obj");
-    Model anothertree("Tree_02/Tree.obj");
-    std::vector<Model>trees = { tree,anothertree};
+   // Model tree("Tree/Tree.obj");
+   // Model anothertree("Tree_02/Tree.obj");
+   // std::vector<Model>trees = { tree,anothertree};
     Shader Mshader("model_vertex.vs", "model_fragment.fs");
     Mshader.use();
     
@@ -252,11 +251,11 @@ int main()
         Mshader.setMat4("model", model);
         Mshader.setMat4("view", view);
         Mshader.setMat4("projection", projection);
-       renderer.drawAllTrees(ourShader, glm::vec3(18.0f,-1.0f,-25.0f), glm::vec3(150.0f), trees);
-        renderer.drawAllTrees(ourShader, glm::vec3(55.0f, -1.0f, -25.0f), glm::vec3(150.0f), trees);
-        renderer.drawAllTrees(ourShader, glm::vec3(18.0f, -1.0f, -60.0f), glm::vec3(150.0f), trees);
-        renderer.drawAllTrees(ourShader, glm::vec3(55.0f, -1.0f, -60.0f), glm::vec3(150.0f), trees);
-        
+      // renderer.drawAllTrees(ourShader, glm::vec3(18.0f,-1.0f,-25.0f), glm::vec3(150.0f), trees);
+        //renderer.drawAllTrees(ourShader, glm::vec3(55.0f, -1.0f, -25.0f), glm::vec3(150.0f), trees);
+        //renderer.drawAllTrees(ourShader, glm::vec3(18.0f, -1.0f, -60.0f), glm::vec3(150.0f), trees);
+        //renderer.drawAllTrees(ourShader, glm::vec3(55.0f, -1.0f, -60.0f), glm::vec3(150.0f), trees);
+       // tree.Draw(ourShader);
         //gordon.Draw(Mshader);
        // renderer.drawModel(Mshader, glm::vec3(0.0f), glm::vec3(0.0f), gordon,view,projection);
         renderer.bind(LVAO, VBO, light_shader);
