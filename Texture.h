@@ -2,7 +2,7 @@
 #define TEXTURE_H
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <stbi/stb_image.h>
 #include <glad/glad.h>
 class Texture {
 private:

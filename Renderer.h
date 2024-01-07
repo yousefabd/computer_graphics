@@ -6,7 +6,7 @@
 #include "Shape.h"
 #include "Vertex.h"
 #include "Texture.h"
-#include<models/Model.h>
+#include<Model.h>
 
 class Renderer {
 public:

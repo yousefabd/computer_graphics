@@ -10,7 +10,6 @@
 #include "Renderer.h"
 #include "Model.h"
 #include "Texture.h"
-#include<stb_image.h>
 #include <bits/stdc++.h>
 //textures
 unsigned int wall;

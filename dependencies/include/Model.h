@@ -4,7 +4,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include<Texture.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include <stbi/stb_image.h>
 #include<Mesh.h>
 class Model {
 	vector<Mesh>meshes;
