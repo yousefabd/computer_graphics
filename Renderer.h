@@ -14,13 +14,14 @@ public:
 	void bind(unsigned int VAO, unsigned int VBO, Shader shader);
     void drawRockDome(Shader, Texture,glm::vec3,glm::vec3,std::vector<unsigned int>);
     void drawGate(Shader,Texture,glm::vec3,glm::vec3,std::vector<unsigned int>);
-    void drawWall(Shader, glm::vec3 ,glm::vec3 );
+    void drawWall(Shader,Texture, glm::vec3 ,glm::vec3,std::vector<unsigned int> );
     void drawMinaret(Shader ,Texture, glm::vec3 , glm::vec3 ,std::vector<unsigned int>);
     void drawMosque(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawcube(Shader,glm::vec3);
     void draw_sky_box(Shader);
     void drawfloor(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawAllTrees(Shader, glm::vec3, glm::vec3, Model);
+
     
 private:
     Shape shape;
@@ -273,12 +274,13 @@ void Renderer::drawRockDome(Shader shader,Texture texture,glm::vec3 position,glm
     texture.activate(textures[5], GL_TEXTURE0);
     drawOctagon(shader, model);
 }
-void::Renderer::drawWall(Shader shader, glm::vec3 position,glm::vec3 scale) {
+void::Renderer::drawWall(Shader shader,Texture texture, glm::vec3 position,glm::vec3 scale,std::vector<unsigned int> textures) {
+    texture.activate(textures[0], GL_TEXTURE0);
     std::vector<TexVertex> vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
     model = glm::scale(model, scale);
+    model = glm::translate(model, position);
     for (int i = 0; i < 4; i++) {
         drawWallside(shader, position,model,scale);
         model = glm::translate(model, glm::vec3(-10.5f, 0.0f, -3.0f));
@@ -304,8 +306,8 @@ void Renderer::drawMinaret(Shader shader,Texture texture, glm::vec3 position, gl
     std::vector<TexVertex> vertices = shape.texCube1;
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
     model = glm::scale(model, scale);
+    model = glm::translate(model, position);
     float x[4] = { 1.0f,1.0f,-1.0f,-1.0f };
     float z[4] = { 1.0f,-1.0f,1.0f,-1.0f };
     texture.activate(textures[0], GL_TEXTURE0);

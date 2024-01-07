@@ -14,7 +14,6 @@
 //textures
 unsigned int wall;
 unsigned int stone;
-//textures
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -82,6 +81,7 @@ int main()
     Shape cube_box;
     Texture cube_textures;
     Renderer renderer;
+    //textures
     Texture texture; 
     unsigned int wall = texture.genTexture("images/wall.jpg");
     unsigned int stone = texture.genTexture("images/wall-windowed.jpeg");
@@ -109,14 +109,6 @@ int main()
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
-        /*"images/right.jpg",
-        "images/left.jpg",
-        "images/top.jpg",
-        "images/bottom.jpg",
-        "images/front.jpg",
-        "images/back.jpg"
-        */
-
        "images/box/cliffrt.png",
         "images/box/clifflf.png",
         "images/box/cliffup.png",
@@ -178,7 +170,7 @@ int main()
     std::vector<unsigned int>mosqueTextures = { windowed_wall,entrance_wall2,wall2,sandstone,smooth_stone,arch_frame,mosque_cylinder2,mosque_wall_inside,mosque_wall_inside2,quartz};
     std::vector<unsigned int>floortextures = { sandstone,quartz,grass,garden_border,smooth_stone};
     //Model tree("tree1_3ds/Tree1.3ds");
-   Model tree("Tree/Tree.fbx");
+    Model tree("Tree/Tree.fbx");
     Shader Mshader("model_vertex.vs", "model_fragment.fs");
     Mshader.use();
     
@@ -199,22 +191,22 @@ int main()
         // clear buffer and depth
         // ------
         renderer.clear();
+        //sky box
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 5600.0f);
-      /** glDepthMask(GL_FALSE);
-       renderer.bind(CVAO, CVBO, Cube_box_shader);
+        glDepthMask(GL_FALSE);
+        renderer.bind(CVAO, CVBO, Cube_box_shader);
         Cube_box_shader.use();
         texture.activate(cube_Sky, GL_TEXTURE0);
         glm::mat4 cube_view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         Cube_box_shader.setMat4("view", cube_view);
         Cube_box_shader.setMat4("projection", projection);
         renderer.draw_sky_box(Cube_box_shader);
-        glDepthMask(GL_TRUE);*/
+        glDepthMask(GL_TRUE);
         glBindVertexArray(VAO);
         ourShader.use();
         //lighting
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 lightposition = glm::vec3(42.0f,55.0f,-15.0f);
-        //std::cout << glfwGetTime() << std::endl;
+        glm::vec3 lightposition = glm::vec3(42.0f,555.0f,-15.0f);
         ourShader.setVec3("light.position", lightposition);
         glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
@@ -224,32 +216,21 @@ int main()
         ourShader.setVec3("matt2.diffuse", 1.0f, 1.0f, 1.0f);
         ourShader.setFloat("mat.shine", 0.5f);
 
-        // pass projection matrix to shader (note that in this case it could change every frame
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
-       // model = glm::translate(model, lightposition);
         ourShader.setMat4("model", model);
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
 
-        // render boxes
+        // render 
         renderer.bind(VAO, VBO, ourShader);
-        //this is the realistic size of the rock dome that should be used
-        // --------------------------------------------------------------
         renderer.drawRockDome(ourShader, texture, glm::vec3(39.5f, 1.3f, -45.5f),glm::vec3(155.0f), rockdomeTextures);
-        //renderer.bind(VAO,VBO,ourShader);
-        //texture.activate(stone, GL_TEXTURE0);
-       // renderer.drawGate(ourShader,wall_position);
-        //texture.activate(wall, GL_TEXTURE0);
-        //renderer.drawWall(ourShader, wall_position,glm::vec3(20.0f));
-      // renderer.drawMinaret(ourShader,texture,glm::vec3(-17.2f, -6.7f,17.2f), glm::vec3(6.0f,6.0f,6.0f),minaretTextures);
-       renderer.drawMosque(ourShader, texture, glm::vec3(33.5f, 0.3f, -45.5f), glm::vec3(215.0f,285.0f,215.0f), mosqueTextures);
-       renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,-120.0f,0.0f),glm::vec3(370.0f,1.0f,370.0f), floortextures);
-       
+        renderer.drawWall(ourShader, texture,glm::vec3(10.0f,0.4f,-11.0f), glm::vec3(1150.0f), {wall});
+        renderer.drawMinaret(ourShader,texture,glm::vec3(2.5f,0.0f,-24.8f), glm::vec3(450.0f,350.0f,450.0f),minaretTextures);
+        renderer.drawMosque(ourShader, texture, glm::vec3(28.0f, 0.35f, -34.5f), glm::vec3(265.0f,385.0f,265.0f), mosqueTextures);
+        renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,-120.0f,0.0f),glm::vec3(370.0f,1.0f,370.0f), floortextures);
+        //render models
         Mshader.use();
-        //model = glm::scale(model, glm::vec3(20.0f));
-        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-       // Mshader.setMat4("model", model);
         Mshader.setMat4("view", view);
         Mshader.setMat4("projection", projection);
         renderer.drawAllTrees(ourShader, glm::vec3(15.0f, -1.0f, -15.0f), glm::vec3(200.0f), tree);
@@ -258,9 +239,7 @@ int main()
         renderer.drawAllTrees(ourShader, glm::vec3(40.0f, -1.0f, -40.0f), glm::vec3(200.0f), tree);
      
    
-      tree.Draw(ourShader);
-        //gordon.Draw(Mshader);
-       // renderer.drawModel(Mshader, glm::vec3(0.0f), glm::vec3(0.0f), gordon,view,projection);
+        tree.Draw(ourShader);
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);
@@ -289,7 +268,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
     }
 
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float yoffset = lastY - ypos; 
 
     lastX = xpos;
     lastY = ypos;

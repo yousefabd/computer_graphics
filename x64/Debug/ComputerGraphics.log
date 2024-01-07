@@ -1,1 +1,28 @@
-﻿  ComputerGraphics.vcxproj -> C:\Users\ASUS\Documents\GitHub3\computer_graphics\x64\Debug\ComputerGraphics.exe
+﻿  ComputerGraphics.cpp
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Shape.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(39,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(56,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(62,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(75,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(84,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(87,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(96,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(102,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(123,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(130,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(137,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(143,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(150,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(156,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(168,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(176,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(181,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(184,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(188,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(202,1): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(316,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(322,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(339,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(453,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\LEGION\Source\Repos\ComputerGraphics\Renderer.h(459,50): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  ComputerGraphics.vcxproj -> C:\Users\LEGION\Source\Repos\ComputerGraphics\x64\Debug\ComputerGraphics.exe
