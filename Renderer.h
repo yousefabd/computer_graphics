@@ -21,6 +21,7 @@ public:
     void draw_sky_box(Shader);
     void drawfloor(Shader, Texture, glm::vec3, glm::vec3, std::vector<unsigned int>);
     void drawAllTrees(Shader, glm::vec3, glm::vec3, Model);
+    void drawHim(Shader, glm::vec3, glm::vec3, Model);
 
     
 private:
@@ -205,6 +206,12 @@ private:
         shader.use();
         shader.setMat4("model", model);
         tree.Draw(shader);
+    }
+    void drawGordon(Shader shader, glm::mat4 model, Model Gordon) {
+            shader.use();
+            model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, .0f));
+            shader.setMat4("model", model);
+            Gordon.Draw(shader);  
     }
 };
 void Renderer::clear() const{
@@ -509,6 +516,13 @@ void Renderer::drawAllTrees(Shader shader, glm::vec3 pos, glm::vec3 scale, Model
 
     
 
+}
+void Renderer::drawHim(Shader shader, glm::vec3 position, glm::vec3 scale, Model Gordon) {
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::scale(model, scale);
+    model = glm::translate(model, position);
+    
+    drawGordon(shader,model,Gordon);
 }
 
 

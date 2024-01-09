@@ -4,7 +4,7 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <Shader.h>
-#include <Camera.h>
+#include<Camera.h>
 #include "Shape.h"
 #include "Vertex.h"
 #include "Renderer.h"
@@ -109,8 +109,8 @@ int main()
     //------------------------------------------------------------------------
     //cubebox stuff
     std::vector<std::string>faces{
-       "images/box/cliffrt.png",
         "images/box/clifflf.png",
+        "images/box/cliffrt.png",
         "images/box/cliffup.png",
         "images/box/cliffdn.png",
         "images/box/cliffft.png",
@@ -171,9 +171,10 @@ int main()
     std::vector<unsigned int>floortextures = { sandstone,quartz,grass,garden_border,smooth_stone};
     //Model tree("tree1_3ds/Tree1.3ds");
     Model tree("Tree/Tree.fbx");
+    Model Gordon("Gordon/gordon.obj");
     Shader Mshader("model_vertex.vs", "model_fragment.fs");
     Mshader.use();
-    
+    camera.firstperson = false;
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -193,20 +194,21 @@ int main()
         renderer.clear();
         //sky box
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 5600.0f);
-        glDepthMask(GL_FALSE);
-        renderer.bind(CVAO, CVBO, Cube_box_shader);
-        Cube_box_shader.use();
-        texture.activate(cube_Sky, GL_TEXTURE0);
-        glm::mat4 cube_view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-        Cube_box_shader.setMat4("view", cube_view);
-        Cube_box_shader.setMat4("projection", projection);
-        renderer.draw_sky_box(Cube_box_shader);
-        glDepthMask(GL_TRUE);
+            glDepthMask(GL_FALSE);
+            renderer.bind(CVAO, CVBO, Cube_box_shader);
+            Cube_box_shader.use();
+            texture.activate(cube_Sky, GL_TEXTURE0);
+            glm::mat4 cube_view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+            Cube_box_shader.setMat4("view", cube_view);
+            Cube_box_shader.setMat4("projection", projection);
+            renderer.draw_sky_box(Cube_box_shader);
+            glDepthMask(GL_TRUE);
+        
         glBindVertexArray(VAO);
         ourShader.use();
         //lighting
-        glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 lightposition = glm::vec3(42.0f,555.0f,-15.0f);
+        glm::vec3 lightColor = glm::vec3(1.0f-glfwGetTime()/255);
+        glm::vec3 lightposition = glm::vec3(42.0f,200.0f,-15.0f);
         ourShader.setVec3("light.position", lightposition);
         glm::vec3 diffuseColor = lightColor * glm::vec3(1.0f);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
@@ -227,24 +229,37 @@ int main()
         renderer.drawRockDome(ourShader, texture, glm::vec3(39.5f, 1.3f, -45.5f),glm::vec3(155.0f), rockdomeTextures);
         renderer.drawWall(ourShader, texture,glm::vec3(10.0f,0.4f,-11.0f), glm::vec3(1150.0f), {wall});
         renderer.drawMinaret(ourShader,texture,glm::vec3(2.5f,0.0f,-24.8f), glm::vec3(450.0f,350.0f,450.0f),minaretTextures);
-        renderer.drawMosque(ourShader, texture, glm::vec3(28.0f, 0.35f, -34.5f), glm::vec3(265.0f,385.0f,265.0f), mosqueTextures);
+        renderer.drawMinaret(ourShader, texture, glm::vec3(25.5f, 0.0f, -24.8f), glm::vec3(450.0f, 350.0f, 450.0f), minaretTextures);
+        renderer.drawMosque(ourShader, texture, glm::vec3(28.0f, 0.35f, -34.5f) , glm::vec3(265.0f,385.0f,265.0f), mosqueTextures);
         renderer.drawfloor(ourShader, texture, glm::vec3(1.0f,-120.0f,0.0f),glm::vec3(370.0f,1.0f,370.0f), floortextures);
         //render models
         Mshader.use();
         Mshader.setMat4("view", view);
         Mshader.setMat4("projection", projection);
         renderer.drawAllTrees(ourShader, glm::vec3(15.0f, -1.0f, -15.0f), glm::vec3(200.0f), tree);
-        renderer.drawAllTrees(ourShader, glm::vec3(15.0f, -1.0f, -40.0f), glm::vec3(200.0f), tree);
-        renderer.drawAllTrees(ourShader, glm::vec3(40.0f, -1.0f, -15.0f), glm::vec3(200.0f), tree);
-        renderer.drawAllTrees(ourShader, glm::vec3(40.0f, -1.0f, -40.0f), glm::vec3(200.0f), tree);
-     
-   
-        tree.Draw(ourShader);
+        renderer.drawAllTrees(ourShader, glm::vec3(15.0f, -1.0f, -40.0f) , glm::vec3(200.0f), tree);
+        renderer.drawAllTrees(ourShader, glm::vec3(40.0f, -1.0f, -15.0f) , glm::vec3(200.0f), tree);
+        renderer.drawAllTrees(ourShader, glm::vec3(40.0f, -1.0f, -40.0f) , glm::vec3(200.0f), tree);
+        
+        ourShader.setMat4("model", model);
+        if (!camera.firstperson) 
+        {
+            model = glm::translate(model, camera.GetPlayer());
+            model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            ourShader.setMat4("model", model);
+            Gordon.Draw(ourShader);  
+        }
+        
+       // model = glm::scale(model, glm::vec3(0.01f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, .0f));
+      
+        
         renderer.bind(LVAO, VBO, light_shader);
         light_shader.use();
         light_shader.setMat4("view", view);
         light_shader.setMat4("projection", projection); 
-        //renderer.drawcube(light_shader, lightposition);
+        renderer.drawcube(light_shader, lightposition);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -281,7 +296,10 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-
+    if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+        camera.firstperson = !camera.firstperson;
+        camera.ProcessKeyboard(FORWARD, deltaTime);
+    }
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
